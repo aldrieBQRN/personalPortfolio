@@ -1,5 +1,3 @@
-# personalPortfolio
-
 # Personal Portfolio Website - John Aldrie Baquiran
 
 A responsive and modern personal portfolio website designed to showcase web development skills, academic projects, and professional experience. The site features a clean user interface with glassmorphism effects, smooth animations, and a fully functional contact system.

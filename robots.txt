@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap URL
-Sitemap: https://aldriebaquiran.page.gd/sitemap.xml
+Sitemap: https://johnaldriebaquiran.vercel.app/sitemap.xml

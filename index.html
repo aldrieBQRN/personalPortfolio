@@ -2342,6 +2342,9 @@
 
                 <div class="reveal">
                     <form class="contact-form glass-panel p-6 md:p-8 rounded-[2rem] space-y-5">
+                        <!-- Anti-spam Honeypot Trap (Hidden from users) -->
+                        <input type="text" name="bot_honeypot" tabindex="-1" autocomplete="off" style="display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important;">
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="space-y-2">
                                 <label class="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Name</label>
@@ -2611,6 +2614,37 @@
 
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // 1. Honeypot check (silently drop bot submissions)
+            const honeypot = this.querySelector('input[name="bot_honeypot"]');
+            if (honeypot && honeypot.value !== '') {
+                console.warn('Spam submission suppressed.');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Message Sent!',
+                    text: 'Thanks for reaching out. I will get back to you soon.',
+                    confirmButtonColor: '#4F46E5'
+                });
+                this.reset();
+                return;
+            }
+
+            // 2. Client-side Rate Limiting (60s cooldown per browser)
+            const lastSent = localStorage.getItem('last_email_sent');
+            const now = Date.now();
+            const COOLDOWN_MS = 60000;
+
+            if (lastSent && (now - parseInt(lastSent, 10)) < COOLDOWN_MS) {
+                const remainingSec = Math.ceil((COOLDOWN_MS - (now - parseInt(lastSent, 10))) / 1000);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Please slow down',
+                    text: `Please wait ${remainingSec} seconds before sending another message.`,
+                    confirmButtonColor: '#4F46E5'
+                });
+                return;
+            }
+
             const btn = this.querySelector('button[type="submit"]');
             const originalText = btn.innerText;
             btn.innerText = 'Sending...';
@@ -2618,6 +2652,7 @@
             emailjs.sendForm('service_sinihpm', 'template_g4yug8b', this)
                 .then((response) => {
                     console.log('EmailJS response:', response);
+                    localStorage.setItem('last_email_sent', Date.now());
                     btn.innerText = 'Message Sent';
                     Swal.fire({
                         icon: 'success',

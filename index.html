@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <script>
-        (function(){
+        (function () {
             var t = localStorage.getItem('portfolio-theme');
             if (t === 'dark') {
                 document.documentElement.classList.add('dark');
             } else {
+                /* Default: light mode. Clear any stale dark preference. */
                 document.documentElement.classList.remove('dark');
+                if (!t) localStorage.setItem('portfolio-theme', 'light');
             }
         })();
     </script>
@@ -18,9 +20,11 @@
     <title>John Aldrie T. Baquiran | Full-Stack Web Developer Portfolio</title>
     <meta name="title" content="John Aldrie T. Baquiran | Full-Stack Web Developer Portfolio">
     <meta name="application-name" content="John Aldrie T. Baquiran Portfolio">
-    <meta name="description" content="John Aldrie T. Baquiran is the Founder & Full-Stack Web Developer at Inertia Digital Solutions, specializing in building robust, scalable web applications.">
+    <meta name="description"
+        content="John Aldrie T. Baquiran is the Founder & Full-Stack Web Developer at Inertia Digital Solutions, specializing in building robust, scalable web applications.">
     <meta name="author" content="John Aldrie T. Baquiran">
-    <meta name="keywords" content="John Aldrie Baquiran, Aldrie Baquiran, Web Developer, Full-Stack Developer, Laravel Developer, Vue.js, React, Node.js, PHP, Batangas State University, Portfolio">
+    <meta name="keywords"
+        content="John Aldrie Baquiran, Aldrie Baquiran, Web Developer, Full-Stack Developer, Laravel Developer, Vue.js, React, Node.js, PHP, Batangas State University, Portfolio">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://johnaldriebaquiran.vercel.app/">
 
@@ -34,7 +38,8 @@
     <meta property="og:site_name" content="John Aldrie T. Baquiran Portfolio">
     <meta property="og:locale" content="en_US">
     <meta property="og:title" content="John Aldrie T. Baquiran | Full-Stack Web Developer">
-    <meta property="og:description" content="Full-stack web developer with 3+ years of experience building robust, scalable applications using Laravel, Vue.js, React, and modern web technologies.">
+    <meta property="og:description"
+        content="Full-stack web developer with 3+ years of experience building robust, scalable applications using Laravel, Vue.js, React, and modern web technologies.">
     <meta property="og:image" content="https://johnaldriebaquiran.vercel.app/images/profile.jpg">
     <meta property="og:image:alt" content="John Aldrie T. Baquiran - Full-Stack Web Developer">
     <meta property="og:image:width" content="1200">
@@ -43,7 +48,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="John Aldrie T. Baquiran | Full-Stack Web Developer">
-    <meta name="twitter:description" content="Full-stack web developer with 3+ years of experience building robust, scalable applications.">
+    <meta name="twitter:description"
+        content="Full-stack web developer with 3+ years of experience building robust, scalable applications.">
     <meta name="twitter:image" content="https://johnaldriebaquiran.vercel.app/images/profile.jpg">
     <meta name="twitter:image:alt" content="John Aldrie T. Baquiran - Full-Stack Web Developer">
 
@@ -103,7 +109,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -118,6 +126,7 @@
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
+
         html.dark {
             --paper: #12110C;
             --ink: #EDE6D4;
@@ -126,9 +135,22 @@
             --spot: #E24A3A;
         }
 
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-        html, body { margin: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        html,
+        body {
+            margin: 0;
+        }
+
         body {
             background: var(--paper);
             color: var(--ink);
@@ -139,18 +161,55 @@
             overflow-x: hidden;
             padding-bottom: var(--safe-bottom);
         }
-        img { max-width: 100%; display: block; }
-        a { color: inherit; }
-        button, input, textarea { font: inherit; color: inherit; }
-        button { background: none; border: 0; cursor: pointer; }
-        ::selection { background: var(--spot); color: var(--paper); }
 
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--paper); }
-        ::-webkit-scrollbar-thumb { background: var(--ink); }
+        img {
+            max-width: 100%;
+            display: block;
+        }
 
-        .display { font-family: "Fraunces", "Iowan Old Style", serif; font-optical-sizing: auto; }
-        .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+            color: inherit;
+        }
+
+        button {
+            background: none;
+            border: 0;
+            cursor: pointer;
+        }
+
+        ::selection {
+            background: var(--spot);
+            color: var(--paper);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--paper);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ink);
+        }
+
+        .display {
+            font-family: "Fraunces", "Iowan Old Style", serif;
+            font-optical-sizing: auto;
+        }
+
+        .mono {
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+        }
 
         .page {
             max-width: 92rem;
@@ -164,39 +223,43 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            display: flex;
+            justify-content: space-between;
             align-items: stretch;
             border-bottom: 1px solid var(--rule);
             background: var(--paper);
             min-height: var(--header);
             padding-top: var(--safe-top);
         }
+
         .mast-brand {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             padding: 0 1rem;
             text-decoration: none;
-            border-right: 1px solid var(--rule);
         }
+
         .mast-brand .mark {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
         }
+
         .mast-brand .name {
             font-family: "Fraunces", serif;
             font-weight: 800;
             font-size: 1.05rem;
             letter-spacing: -0.03em;
         }
+
         .mast-index {
             display: none;
             align-items: center;
             gap: 0;
         }
+
         .mast-index a {
             text-decoration: none;
             font-family: "IBM Plex Mono", monospace;
@@ -209,13 +272,20 @@
             align-items: center;
             border-right: 1px solid var(--rule);
         }
-        .mast-index a:hover { background: var(--ink); color: var(--paper); }
+
+        .mast-index a:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
         .mast-actions {
             display: flex;
             justify-content: flex-end;
             align-items: stretch;
         }
-        .mast-actions button, .mast-actions a {
+
+        .mast-actions button,
+        .mast-actions a {
             width: 3.25rem;
             display: flex;
             align-items: center;
@@ -223,13 +293,30 @@
             border-left: 1px solid var(--rule);
             text-decoration: none;
         }
-        .mast-actions button:hover, .mast-actions a:hover { background: var(--spot); color: var(--paper); }
-        #mobile-menu-btn { display: flex; }
+
+        .mast-actions button:hover,
+        .mast-actions a:hover {
+            background: var(--spot);
+            color: var(--paper);
+        }
+
+        #mobile-menu-btn {
+            display: flex;
+        }
+
 
         @media (min-width: 900px) {
-            .mast-index { display: flex; }
-            #mobile-menu-btn { display: none; }
-            .mast-brand { border-right: 0; }
+            .mast-index {
+                display: flex;
+            }
+
+            #mobile-menu-btn {
+                display: none;
+            }
+
+            .mast-brand {
+                border-right: 0;
+            }
         }
 
         #mobile-menu {
@@ -241,7 +328,11 @@
             padding: calc(1.5rem + var(--safe-top)) 1.5rem 2rem;
             flex-direction: column;
         }
-        #mobile-menu.open { display: flex; }
+
+        #mobile-menu.open {
+            display: flex;
+        }
+
         #mobile-menu .contents-label {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.7rem;
@@ -251,6 +342,7 @@
             padding-bottom: 0.75rem;
             margin-bottom: 1rem;
         }
+
         #mobile-menu a.mobile-link {
             text-decoration: none;
             font-family: "Fraunces", serif;
@@ -261,6 +353,7 @@
             border-bottom: 1px solid var(--rule);
             padding: 0.55rem 0;
         }
+
         #close-menu-btn {
             align-self: flex-end;
             font-family: "IBM Plex Mono", monospace;
@@ -278,10 +371,12 @@
             grid-template-columns: 1fr;
             border-bottom: 1px solid var(--rule);
         }
+
         .cover-main {
             padding: 1.75rem 1.15rem 2rem;
             border-bottom: 1px solid var(--rule);
         }
+
         .cover-kicker {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.68rem;
@@ -289,7 +384,11 @@
             text-transform: uppercase;
             margin: 0 0 1.25rem;
         }
-        .cover-kicker span { color: var(--spot); }
+
+        .cover-kicker span {
+            color: var(--spot);
+        }
+
         h1 {
             font-family: "Fraunces", serif;
             font-weight: 800;
@@ -298,6 +397,7 @@
             margin: 0;
             text-align: left;
         }
+
         h1 .given {
             display: block;
             font-size: clamp(1.4rem, 5.5vw, 2.6rem);
@@ -305,26 +405,30 @@
             font-style: italic;
             letter-spacing: -0.03em;
         }
+
         h1 .family {
             display: block;
             font-size: clamp(3.4rem, 16vw, 10.5rem);
             text-transform: uppercase;
             margin-left: -0.04em;
         }
+
         .cover-dek {
             max-width: 28rem;
             margin: 1.5rem 0 0;
             font-size: 1.2rem;
             font-style: italic;
         }
+
         .cover-actions {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;  /* stack full-width on mobile */
             gap: 0;
             margin-top: 1.75rem;
             border-top: 1px solid var(--rule);
             border-left: 1px solid var(--rule);
         }
+
         .cover-actions a {
             text-decoration: none;
             font-family: "IBM Plex Mono", monospace;
@@ -334,14 +438,33 @@
             padding: 0.9rem 1.1rem;
             border-right: 1px solid var(--rule);
             border-bottom: 1px solid var(--rule);
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
-        .cover-actions a.primary { background: var(--ink); color: var(--paper); }
-        .cover-actions a:hover { background: var(--spot); color: var(--paper); }
+
+        .cover-actions a.primary {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .cover-actions a:hover {
+            background: var(--spot);
+            color: var(--paper);
+        }
+
+        @media (min-width: 540px) {
+            .cover-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
 
         .cover-side {
             display: grid;
             grid-template-columns: 1fr 1fr;
         }
+
         .cover-folio {
             padding: 1.1rem;
             border-right: 1px solid var(--rule);
@@ -351,11 +474,20 @@
             text-transform: uppercase;
             line-height: 1.7;
         }
-        .cover-folio strong { display: block; font-size: 1.6rem; font-family: "Fraunces", serif; letter-spacing: -0.04em; color: var(--spot); }
+
+        .cover-folio strong {
+            display: block;
+            font-size: 1.6rem;
+            font-family: "Fraunces", serif;
+            letter-spacing: -0.04em;
+            color: var(--spot);
+        }
+
         .cover-social {
             display: flex;
             flex-direction: column;
         }
+
         .cover-social a {
             flex: 1;
             display: flex;
@@ -369,20 +501,35 @@
             text-transform: uppercase;
             border-bottom: 1px solid var(--rule);
         }
-        .cover-social a:last-child { border-bottom: 0; }
-        .cover-social a:hover { background: var(--ink); color: var(--paper); }
+
+        .cover-social a:last-child {
+            border-bottom: 0;
+        }
+
+        .cover-social a:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
 
         @media (min-width: 900px) {
             #about {
                 grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 0.55fr);
             }
+
             .cover-main {
                 border-bottom: 0;
                 border-right: 1px solid var(--rule);
                 padding: 2.5rem 1.75rem 3rem;
             }
-            .cover-side { grid-template-columns: 1fr; }
-            .cover-folio { border-right: 0; border-bottom: 1px solid var(--rule); }
+
+            .cover-side {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-folio {
+                border-right: 0;
+                border-bottom: 1px solid var(--rule);
+            }
         }
 
         /* —— Ledger —— */
@@ -391,12 +538,17 @@
             grid-template-columns: 1fr 1fr;
             border-bottom: 1px solid var(--rule);
         }
+
         .ledger div {
             padding: 1rem 1.1rem 1.15rem;
             border-right: 1px solid var(--rule);
             border-bottom: 1px solid var(--rule);
         }
-        .ledger div:nth-child(2n) { border-right: 0; }
+
+        .ledger div:nth-child(2n) {
+            border-right: 0;
+        }
+
         .ledger .n {
             font-family: "Fraunces", serif;
             font-size: clamp(2rem, 6vw, 3.4rem);
@@ -404,6 +556,7 @@
             letter-spacing: -0.05em;
             line-height: 1;
         }
+
         .ledger .l {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -412,20 +565,36 @@
             margin-top: 0.35rem;
             color: var(--mute);
         }
+
         @media (min-width: 800px) {
-            .ledger { grid-template-columns: repeat(4, 1fr); }
-            .ledger div { border-bottom: 0; }
-            .ledger div:nth-child(2n) { border-right: 1px solid var(--rule); }
-            .ledger div:last-child { border-right: 0; }
+            .ledger {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .ledger div {
+                border-bottom: 0;
+            }
+
+            .ledger div:nth-child(2n) {
+                border-right: 1px solid var(--rule);
+            }
+
+            .ledger div:last-child {
+                border-right: 0;
+            }
         }
 
         /* —— Sections —— */
-        section { scroll-margin-top: calc(var(--header) + var(--safe-top) + 8px); }
+        section {
+            scroll-margin-top: calc(var(--header) + var(--safe-top) + 8px);
+        }
+
         .section-head {
             display: grid;
             grid-template-columns: auto 1fr;
             border-bottom: 1px solid var(--rule);
         }
+
         .section-num {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.68rem;
@@ -434,6 +603,7 @@
             border-right: 1px solid var(--rule);
             writing-mode: horizontal-tb;
         }
+
         .section-head h2 {
             font-family: "Fraunces", serif;
             font-size: clamp(2rem, 7vw, 4.4rem);
@@ -447,18 +617,30 @@
         .about-grid {
             display: grid;
             grid-template-columns: 1fr;
-        }
-        .portrait {
             border-bottom: 1px solid var(--rule);
         }
+
+        .portrait {
+            border-bottom: 1px solid var(--rule);
+            background: var(--paper);
+            margin: 0;
+            padding: 0;
+        }
+
         .portrait img {
             width: 100%;
-            height: min(70vh, 36rem);
+            /* Profile is 3972x3972 (1:1) — container matches ratio, image fills perfectly */
+            aspect-ratio: 1 / 1;
+            height: auto;
             object-fit: cover;
-            object-position: top;
+            object-position: top left;
             filter: grayscale(1) contrast(1.08);
         }
-        html.dark .portrait img { filter: grayscale(1) contrast(1.05) brightness(0.92); }
+
+        html.dark .portrait img {
+            filter: grayscale(1) contrast(1.05) brightness(0.92);
+        }
+
         .portrait figcaption {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
@@ -467,8 +649,16 @@
             padding: 0.7rem 1rem;
             border-top: 1px solid var(--rule);
         }
-        .about-copy { padding: 1.4rem 1.15rem 2rem; }
-        .about-copy p { margin: 0 0 1rem; color: var(--ink); }
+
+        .about-copy {
+            padding: 1.4rem 1.15rem 2rem;
+        }
+
+        .about-copy p {
+            margin: 0 0 1rem;
+            color: var(--ink);
+        }
+
         .pull {
             font-family: "Fraunces", serif;
             font-size: clamp(1.4rem, 3.4vw, 2rem);
@@ -480,10 +670,12 @@
             padding-left: 0.9rem;
             border-left: 3px solid var(--spot);
         }
+
         .vitae {
             margin-top: 1.5rem;
             border-top: 1px solid var(--rule);
         }
+
         .vitae article {
             display: grid;
             grid-template-columns: 5.5rem 1fr;
@@ -491,6 +683,7 @@
             padding: 0.95rem 0;
             border-bottom: 1px solid var(--rule);
         }
+
         .vitae dt {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -498,34 +691,79 @@
             text-transform: uppercase;
             color: var(--spot);
         }
-        .vitae h3 { margin: 0; font-family: "Fraunces", serif; font-size: 1.15rem; }
-        .vitae p { margin: 0.2rem 0 0; font-size: 0.95rem; color: var(--mute); }
+
+        .vitae h3 {
+            margin: 0;
+            font-family: "Fraunces", serif;
+            font-size: 1.15rem;
+        }
+
+        .vitae p {
+            margin: 0.2rem 0 0;
+            font-size: 0.95rem;
+            color: var(--mute);
+        }
 
         @media (min-width: 900px) {
-            .about-grid { grid-template-columns: 0.9fr 1.15fr; }
-            .portrait { border-bottom: 0; border-right: 1px solid var(--rule); }
-            .portrait img { height: 100%; min-height: 36rem; }
-            .about-copy { padding: 2rem 2rem 2.5rem; columns: 1; }
+            .about-grid {
+                grid-template-columns: 0.65fr 1.35fr;
+            }
+
+            .portrait {
+                display: flex;
+                flex-direction: column;
+                border-bottom: 0;
+                border-right: 1px solid var(--rule);
+                overflow: hidden;
+            }
+
+            .portrait img {
+                width: 100%;
+                flex: 1;               /* grow to fill remaining space */
+                min-height: 28rem;
+                height: 0;             /* flex handles height, not intrinsic size */
+                aspect-ratio: unset;
+                object-fit: cover;
+                object-position: top left;
+            }
+
+            .about-copy {
+                padding: 2rem 2rem 2.5rem;
+                columns: 1;
+            }
         }
 
         /* —— Certs as clippings —— */
-        .clippings { display: grid; }
+        .clippings {
+            display: grid;
+        }
+
         .clip {
             display: grid;
             grid-template-columns: 1fr;
             border-bottom: 1px solid var(--rule);
             cursor: pointer;
         }
-        .clip:hover { background: color-mix(in srgb, var(--ink) 4%, var(--paper)); }
+
+        .clip:hover {
+            background: color-mix(in srgb, var(--ink) 4%, var(--paper));
+        }
+
         .clip img {
             width: 100%;
-            height: 11rem;
+            /* Certificate 3301x2476: lock aspect ratio so placeholder matches the image exactly */
+            aspect-ratio: 3301 / 2476;
+            height: auto;
             object-fit: cover;
-            object-position: top;
+            object-position: center top;
             filter: grayscale(1);
             border-bottom: 1px solid var(--rule);
         }
-        .clip-body { padding: 1rem 1.15rem 1.25rem; }
+
+        .clip-body {
+            padding: 1rem 1.15rem 1.25rem;
+        }
+
         .clip-meta {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -534,9 +772,24 @@
             color: var(--spot);
             margin-bottom: 0.35rem;
         }
-        .clip h3 { margin: 0 0 0.4rem; font-family: "Fraunces", serif; font-size: 1.45rem; }
-        .clip ul { margin: 0.6rem 0 0; padding: 0; list-style: none; }
-        .clip li { font-size: 0.92rem; padding: 0.15rem 0; }
+
+        .clip h3 {
+            margin: 0 0 0.4rem;
+            font-family: "Fraunces", serif;
+            font-size: 1.45rem;
+        }
+
+        .clip ul {
+            margin: 0.6rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .clip li {
+            font-size: 0.92rem;
+            padding: 0.15rem 0;
+        }
+
         .clip footer {
             display: flex;
             justify-content: space-between;
@@ -548,37 +801,73 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
+
         @media (min-width: 800px) {
-            .clip { grid-template-columns: 16rem 1fr; }
-            .clip img { height: 100%; border-bottom: 0; border-right: 1px solid var(--rule); }
+            .clip {
+                grid-template-columns: 25rem 1fr;
+            }
+
+            .clip img {
+                width: 100%;
+                height: 100%;
+                /* fill the full card row — no gap below */
+                object-fit: contain;
+                /* show full certificate, no cropping */
+                background: var(--paper);
+                border-bottom: 0;
+                border-right: 1px solid var(--rule);
+            }
         }
 
         /* —— Practice / skills —— */
-        .practice { display: grid; }
+        .practice {
+            display: grid;
+        }
+
         .practice article {
             padding: 1.25rem 1.15rem 1.4rem;
             border-bottom: 1px solid var(--rule);
         }
+
         .practice .idx {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
             color: var(--spot);
             letter-spacing: 0.16em;
         }
+
         .practice h3 {
             font-family: "Fraunces", serif;
             font-size: clamp(1.5rem, 3vw, 2.1rem);
             margin: 0.25rem 0 0.5rem;
             letter-spacing: -0.03em;
         }
-        .practice p { margin: 0; color: var(--mute); }
-        @media (min-width: 800px) {
-            .practice { grid-template-columns: 1.4fr 1fr; }
-            .practice article:nth-child(odd) { border-right: 1px solid var(--rule); }
-            .practice article.wide { grid-column: 1 / -1; border-right: 0; }
+
+        .practice p {
+            margin: 0;
+            color: var(--mute);
         }
 
-        .index-block { border-bottom: 1px solid var(--rule); padding: 1.25rem 1.15rem 1.75rem; }
+        @media (min-width: 800px) {
+            .practice {
+                grid-template-columns: 1.4fr 1fr;
+            }
+
+            .practice article:nth-child(odd) {
+                border-right: 1px solid var(--rule);
+            }
+
+            .practice article.wide {
+                grid-column: 1 / -1;
+                border-right: 0;
+            }
+        }
+
+        .index-block {
+            border-bottom: 1px solid var(--rule);
+            padding: 1.25rem 1.15rem 1.75rem;
+        }
+
         .index-block h3 {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.68rem;
@@ -586,12 +875,18 @@
             text-transform: uppercase;
             margin: 0 0 1rem;
         }
-        .stack-table { width: 100%; border-collapse: collapse; }
+
+        .stack-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
         .stack-table td {
             border-top: 1px solid var(--rule);
             padding: 0.55rem 0.4rem 0.55rem 0;
             vertical-align: top;
         }
+
         .stack-table td:first-child {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
@@ -607,7 +902,9 @@
             flex-wrap: wrap;
             border-bottom: 1px solid var(--rule);
         }
-        .proj-tab, .mobile-project-filter-btn {
+
+        .proj-tab,
+        .mobile-project-filter-btn {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.68rem;
             letter-spacing: 0.14em;
@@ -616,11 +913,29 @@
             border-right: 1px solid var(--rule);
             min-height: 44px;
         }
-        .proj-tab.active, .proj-tab:hover { background: var(--ink); color: var(--paper); }
-        .mobile-project-filter-btn { display: none; width: 100%; justify-content: space-between; align-items: center; border-right: 0; }
+
+        .proj-tab.active,
+        .proj-tab:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .mobile-project-filter-btn {
+            display: none;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 0;
+        }
+
         @media (max-width: 700px) {
-            .project-filter-desktop { display: none !important; }
-            .mobile-project-filter-btn { display: flex; }
+            .project-filter-desktop {
+                display: none !important;
+            }
+
+            .mobile-project-filter-btn {
+                display: flex;
+            }
         }
 
         #projectFilterModal {
@@ -631,8 +946,17 @@
             align-items: flex-end;
             justify-content: center;
         }
-        #projectFilterModal.open { display: flex; }
-        #projectFilterModal-backdrop { position: absolute; inset: 0; background: rgba(18,17,12,0.72); }
+
+        #projectFilterModal.open {
+            display: flex;
+        }
+
+        #projectFilterModal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(18, 17, 12, 0.72);
+        }
+
         #projectFilterModal-panel {
             position: relative;
             z-index: 1;
@@ -641,37 +965,69 @@
             border-top: 1px solid var(--rule);
             padding: 1.1rem;
         }
-        #projectFilterModal-panel h3 { font-family: "Fraunces", serif; margin: 0 0 0.75rem; }
-        .mobile-proj-tab { width: 100%; border: 1px solid var(--rule); border-bottom: 0; text-align: left; }
-        .mobile-proj-tab:last-of-type { border-bottom: 1px solid var(--rule); }
 
-        #projects-grid { display: flex; flex-direction: column; }
+        #projectFilterModal-panel h3 {
+            font-family: "Fraunces", serif;
+            margin: 0 0 0.75rem;
+        }
+
+        .mobile-proj-tab {
+            width: 100%;
+            border: 1px solid var(--rule);
+            border-bottom: 0;
+            text-align: left;
+        }
+
+        .mobile-proj-tab:last-of-type {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        #projects-grid {
+            display: flex;
+            flex-direction: column;
+        }
+
         .proj-card {
             display: grid;
             grid-template-columns: 1fr;
             border-bottom: 1px solid var(--rule);
             cursor: pointer;
         }
-        .proj-card:hover .family-title { color: var(--spot); }
+
+        .proj-card:hover .family-title {
+            color: var(--spot);
+        }
+
         .proj-card-thumb-wrap {
             overflow: hidden;
             border-bottom: 1px solid var(--rule);
             aspect-ratio: 16 / 10;
         }
+
         .proj-card-thumb {
             width: 100%;
             height: 100%;
             object-fit: cover;
             filter: grayscale(1) contrast(1.05);
         }
-        .proj-card:hover .proj-card-thumb { filter: grayscale(0) contrast(1); }
-        .proj-copy { padding: 1.1rem 1.15rem 1.3rem; display: flex; flex-direction: column; }
+
+        .proj-card:hover .proj-card-thumb {
+            filter: grayscale(0) contrast(1);
+        }
+
+        .proj-copy {
+            padding: 1.1rem 1.15rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
         .proj-no {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
             letter-spacing: 0.18em;
             color: var(--spot);
         }
+
         .family-title {
             font-family: "Fraunces", serif;
             font-size: clamp(1.6rem, 4vw, 2.6rem);
@@ -680,8 +1036,19 @@
             line-height: 1;
             margin: 0.25rem 0 0.5rem;
         }
-        .proj-copy p { margin: 0 0 0.85rem; color: var(--mute); }
-        .tags { display: flex; flex-wrap: wrap; gap: 0; margin-top: auto; }
+
+        .proj-copy p {
+            margin: 0 0 0.85rem;
+            color: var(--mute);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-top: auto;
+        }
+
         .tags span {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -691,6 +1058,7 @@
             border: 1px solid var(--rule);
             margin: -1px 0 0 -1px;
         }
+
         .read-more {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.65rem;
@@ -700,24 +1068,45 @@
             padding-top: 0.7rem;
             border-top: 1px solid var(--rule);
         }
+
         @media (min-width: 860px) {
             .proj-card {
-                grid-template-columns: 1.15fr 0.85fr;
+                grid-template-columns: 0.7fr 1.3fr;  /* smaller image, larger text */
             }
-            .proj-card:nth-child(even) { grid-template-columns: 0.85fr 1.15fr; }
-            .proj-card:nth-child(even) .proj-card-thumb-wrap { order: 2; border-bottom: 0; border-left: 1px solid var(--rule); }
-            .proj-card:nth-child(odd) .proj-card-thumb-wrap { border-bottom: 0; border-right: 1px solid var(--rule); }
-            .proj-copy { padding: 1.5rem 1.6rem; }
+
+            .proj-card:nth-child(even) {
+                grid-template-columns: 1.3fr 0.7fr;
+            }
+
+            .proj-card:nth-child(even) .proj-card-thumb-wrap {
+                order: 2;
+                border-bottom: 0;
+                border-left: 1px solid var(--rule);
+            }
+
+            .proj-card:nth-child(odd) .proj-card-thumb-wrap {
+                border-bottom: 0;
+                border-right: 1px solid var(--rule);
+            }
+
+            .proj-copy {
+                padding: 1.5rem 1.6rem;
+            }
+
             .proj-card:nth-child(1) {
-                grid-template-columns: 1.4fr 0.7fr;
+                grid-template-columns: 0.7fr 1.3fr;
             }
-            .proj-card:nth-child(1) .family-title { font-size: clamp(2.4rem, 5vw, 4rem); }
+
+            .proj-card:nth-child(1) .family-title {
+                font-size: clamp(2.4rem, 5vw, 4rem);
+            }
         }
 
         /* —— Contact —— */
         .contact-grid {
             display: grid;
         }
+
         .directory a {
             display: grid;
             grid-template-columns: 7rem 1fr;
@@ -726,19 +1115,29 @@
             text-decoration: none;
             border-bottom: 1px solid var(--rule);
         }
-        .directory a:hover { background: var(--ink); color: var(--paper); }
+
+        .directory a:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
         .directory .k {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
         }
-        .directory .v { font-size: 1.05rem; word-break: break-word; }
+
+        .directory .v {
+            font-size: 1.05rem;
+            word-break: break-word;
+        }
 
         .contact-form {
             padding: 1.25rem 1.15rem 1.75rem;
             border-top: 1px solid var(--rule);
         }
+
         .contact-form label {
             display: block;
             font-family: "IBM Plex Mono", monospace;
@@ -747,7 +1146,9 @@
             text-transform: uppercase;
             margin: 0.9rem 0 0.35rem;
         }
-        .contact-form input, .contact-form textarea {
+
+        .contact-form input,
+        .contact-form textarea {
             width: 100%;
             background: transparent;
             border: 0;
@@ -756,7 +1157,12 @@
             padding: 0.55rem 0;
             outline: none;
         }
-        .contact-form input:focus, .contact-form textarea:focus { border-bottom-color: var(--spot); }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-bottom-color: var(--spot);
+        }
+
         .contact-form button[type="submit"] {
             margin-top: 1.25rem;
             width: 100%;
@@ -769,11 +1175,25 @@
             padding: 1rem;
             border: 1px solid var(--ink);
         }
-        .contact-form button[type="submit"]:hover { background: var(--spot); border-color: var(--spot); }
+
+        .contact-form button[type="submit"]:hover {
+            background: var(--spot);
+            border-color: var(--spot);
+        }
+
         @media (min-width: 860px) {
-            .contact-grid { grid-template-columns: 0.9fr 1.1fr; }
-            .directory { border-right: 1px solid var(--rule); }
-            .contact-form { border-top: 0; padding: 1.5rem 1.75rem 2rem; }
+            .contact-grid {
+                grid-template-columns: 0.9fr 1.1fr;
+            }
+
+            .directory {
+                border-right: 1px solid var(--rule);
+            }
+
+            .contact-form {
+                border-top: 0;
+                padding: 1.5rem 1.75rem 2rem;
+            }
         }
 
         /* —— Colophon —— */
@@ -783,11 +1203,35 @@
             padding: 1.5rem 1.15rem 2rem;
             border-top: 3px solid var(--rule);
         }
-        .colophon h3 { font-family: "Fraunces", serif; margin: 0 0 0.25rem; }
-        .colophon p, .colophon a { font-size: 0.95rem; }
-        .colophon nav { display: flex; flex-direction: column; gap: 0.35rem; }
-        .colophon a { text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
-        .colophon a:hover { color: var(--spot); }
+
+        .colophon h3 {
+            font-family: "Fraunces", serif;
+            margin: 0 0 0.25rem;
+        }
+
+        .colophon p,
+        .colophon a {
+            font-size: 0.95rem;
+        }
+
+        .colophon nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .colophon a {
+            text-decoration: none;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .colophon a:hover {
+            color: var(--spot);
+        }
+
         .colophon-end {
             display: flex;
             justify-content: space-between;
@@ -800,29 +1244,59 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
+
         @media (min-width: 800px) {
-            .colophon { grid-template-columns: 1.4fr 0.8fr 0.8fr; padding: 2rem 1.5rem; }
+            .colophon {
+                grid-template-columns: 1.4fr 0.8fr 0.8fr;
+                padding: 2rem 1.5rem;
+            }
         }
 
         /* —— Reveal —— */
-        .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur {
+        .reveal,
+        .reveal-left,
+        .reveal-right,
+        .reveal-scale,
+        .reveal-blur {
             opacity: 0;
             transform: translateY(18px);
             transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
         }
-        .reveal.active, .reveal-left.active, .reveal-right.active, .reveal-scale.active, .reveal-blur.active {
+
+        .reveal.active,
+        .reveal-left.active,
+        .reveal-right.active,
+        .reveal-scale.active,
+        .reveal-blur.active {
             opacity: 1;
             transform: none;
         }
+
         @media (prefers-reduced-motion: reduce) {
-            .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur {
-                opacity: 1 !important; transform: none !important; transition: none !important;
+
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .reveal-scale,
+            .reveal-blur {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             }
         }
 
         /* —— Carousel / lightbox / modal —— */
-        .carousel-wrapper { position: relative; overflow: hidden; border: 1px solid var(--rule); }
-        .carousel-track { display: flex; transition: transform 0.45s var(--ease); }
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--rule);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.45s var(--ease);
+        }
+
         .carousel-slide {
             flex: 0 0 100%;
             width: 100%;
@@ -831,62 +1305,143 @@
             cursor: pointer;
             overflow: hidden;
         }
-        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .carousel-slide-overlay {
-            position: absolute; inset: 0;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: transparent;
         }
-        .carousel-slide-overlay i { color: var(--paper); opacity: 0; }
-        .carousel-slide:hover .carousel-slide-overlay { background: color-mix(in srgb, var(--ink) 35%, transparent); }
-        .carousel-slide:hover .carousel-slide-overlay i { opacity: 1; }
+
+        .carousel-slide-overlay i {
+            color: var(--paper);
+            opacity: 0;
+        }
+
+        .carousel-slide:hover .carousel-slide-overlay {
+            background: color-mix(in srgb, var(--ink) 35%, transparent);
+        }
+
+        .carousel-slide:hover .carousel-slide-overlay i {
+            opacity: 1;
+        }
+
         .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            z-index: 10; width: 44px; height: 44px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
             border: 1px solid var(--rule);
             background: var(--paper);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .carousel-prev { left: 8px; }
-        .carousel-next { right: 8px; }
-        .carousel-btn:disabled { opacity: 0.3; }
-        .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-        .carousel-dot { width: 8px; height: 8px; background: var(--mute); }
-        .carousel-dot.active { background: var(--spot); width: 22px; }
+
+        .carousel-prev {
+            left: 8px;
+        }
+
+        .carousel-next {
+            right: 8px;
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--mute);
+        }
+
+        .carousel-dot.active {
+            background: var(--spot);
+            width: 22px;
+        }
 
         @media (min-width: 768px) {
-            .carousel-wrapper { overflow: visible; }
+            .carousel-wrapper {
+                overflow: visible;
+            }
+
             .carousel-track {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0;
                 transform: none !important;
             }
-            .carousel-slide { flex: none; width: 100%; border: 1px solid var(--rule); margin: -1px 0 0 -1px; }
-            .carousel-btn, .carousel-dots { display: none !important; }
+
+            .carousel-slide {
+                flex: none;
+                width: 100%;
+                border: 1px solid var(--rule);
+                margin: -1px 0 0 -1px;
+            }
+
+            .carousel-btn,
+            .carousel-dots {
+                display: none !important;
+            }
         }
 
         #projectModal {
             display: none;
-            position: fixed; inset: 0; z-index: 70;
-            align-items: flex-start; justify-content: center;
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            align-items: flex-start;
+            justify-content: center;
             padding: 0.75rem;
             overflow-y: auto;
         }
-        #projectModal.open { display: flex; }
-        #projectModal-backdrop { position: fixed; inset: 0; background: rgba(18,17,12,0.82); }
+
+        #projectModal.open {
+            display: flex;
+        }
+
+        #projectModal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(18, 17, 12, 0.82);
+        }
+
         #projectModal-inner {
-            position: relative; z-index: 1;
-            width: 100%; max-width: 56rem;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 56rem;
             background: var(--paper);
             border: 1px solid var(--rule);
             margin: 1rem auto;
         }
+
         .modal-head {
-            display: flex; justify-content: space-between; gap: 1rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
             padding: 1rem 1.15rem;
             border-bottom: 1px solid var(--rule);
         }
+
         .modal-kicker {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -894,14 +1449,31 @@
             text-transform: uppercase;
             color: var(--spot);
         }
-        .modal-head h3 { font-family: "Fraunces", serif; font-size: clamp(1.5rem, 4vw, 2.4rem); margin: 0.2rem 0 0; letter-spacing: -0.04em; }
+
+        .modal-head h3 {
+            font-family: "Fraunces", serif;
+            font-size: clamp(1.5rem, 4vw, 2.4rem);
+            margin: 0.2rem 0 0;
+            letter-spacing: -0.04em;
+        }
+
         .close-x {
-            width: 44px; height: 44px;
+            width: 44px;
+            height: 44px;
             border: 1px solid var(--rule);
             flex-shrink: 0;
         }
-        .modal-body { padding: 1.15rem; }
-        .issue { border: 1px solid var(--rule); padding: 0.9rem; margin-bottom: 0.75rem; }
+
+        .modal-body {
+            padding: 1.15rem;
+        }
+
+        .issue {
+            border: 1px solid var(--rule);
+            padding: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
         .issue h4 {
             font-family: "IBM Plex Mono", monospace;
             font-size: 0.62rem;
@@ -910,13 +1482,46 @@
             margin: 0 0 0.4rem;
             color: var(--spot);
         }
-        .issue p, .issue li { margin: 0; font-size: 0.95rem; }
-        .issue ul { margin: 0; padding-left: 1.1rem; }
-        .result-row { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); }
-        .result-row div { padding: 0.7rem; border-right: 1px solid var(--rule); }
-        .result-row div:last-child { border-right: 0; }
-        .result-row strong { display: block; font-family: "Fraunces", serif; font-size: 1.25rem; }
-        .link-row { display: flex; flex-wrap: wrap; gap: 0; margin-top: 0.8rem; }
+
+        .issue p,
+        .issue li {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .issue ul {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .result-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--rule);
+        }
+
+        .result-row div {
+            padding: 0.7rem;
+            border-right: 1px solid var(--rule);
+        }
+
+        .result-row div:last-child {
+            border-right: 0;
+        }
+
+        .result-row strong {
+            display: block;
+            font-family: "Fraunces", serif;
+            font-size: 1.25rem;
+        }
+
+        .link-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-top: 0.8rem;
+        }
+
         .link-row a {
             text-decoration: none;
             font-family: "IBM Plex Mono", monospace;
@@ -927,16 +1532,55 @@
             border: 1px solid var(--rule);
             margin: -1px 0 0 -1px;
         }
-        .link-row a.ink { background: var(--ink); color: var(--paper); }
 
-        #imagePreviewModal { position: fixed; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; padding: 1rem; }
-        #imagePreviewModal.open, #imagePreviewModal:not(.hidden) { display: flex; }
-        #imagePreviewModal.hidden { display: none !important; }
-        #imagePreviewModal .veil { position: absolute; inset: 0; background: #0b100c; }
-        #previewImage { position: relative; z-index: 1; max-height: 90vh; max-width: 95vw; object-fit: contain; border: 1px solid var(--ink); }
+        .link-row a.ink {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        #imagePreviewModal {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #imagePreviewModal.open,
+        #imagePreviewModal:not(.hidden) {
+            display: flex;
+        }
+
+        #imagePreviewModal.hidden {
+            display: none !important;
+        }
+
+        #imagePreviewModal .veil {
+            position: absolute;
+            inset: 0;
+            background: #0b100c;
+        }
+
+        #previewImage {
+            position: relative;
+            z-index: 1;
+            max-height: 90vh;
+            max-width: 95vw;
+            object-fit: contain;
+            border: 1px solid var(--ink);
+        }
+
         .preview-close {
-            position: absolute; top: calc(var(--safe-top) + 1rem); right: 1rem; z-index: 2;
-            width: 44px; height: 44px; border: 1px solid var(--paper); color: var(--paper);
+            position: absolute;
+            top: calc(var(--safe-top) + 1rem);
+            right: 1rem;
+            z-index: 2;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--paper);
+            color: var(--paper);
         }
     </style>
 </head>
@@ -957,7 +1601,8 @@
             </nav>
             <div class="mast-actions">
                 <button id="theme-toggle" aria-label="Toggle dark and light theme"><i class="fas fa-sun"></i></button>
-                <a href="/resume.pdf" download="John_Aldrie_Baquiran_Resume.pdf" aria-label="Download resume"><i class="fas fa-file-arrow-down"></i></a>
+                <a href="/resume.pdf" download="John_Aldrie_Baquiran_Resume.pdf" aria-label="Download resume"><i
+                        class="fas fa-file-arrow-down"></i></a>
                 <button id="mobile-menu-btn" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
             </div>
         </header>
@@ -980,9 +1625,11 @@
                         <span class="given">John Aldrie T.</span>
                         <span class="family">Baquiran</span>
                     </h1>
-                    <p class="cover-dek">Full-stack systems for operators who cannot afford fragile software. Built in production, not in mockups.</p>
+                    <p class="cover-dek">Full-stack systems for operators who cannot afford fragile software. Built in
+                        production, not in mockups.</p>
                     <div class="cover-actions">
-                        <a class="primary" href="/resume.pdf" download="John_Aldrie_Baquiran_Resume.pdf">Download résumé</a>
+                        <a class="primary" href="/resume.pdf" download="John_Aldrie_Baquiran_Resume.pdf">Download
+                            résumé</a>
                         <a href="#contact">Commission a system</a>
                         <a href="#projects">Read the index</a>
                     </div>
@@ -991,21 +1638,37 @@
                     <div class="cover-folio">
                         <strong>03+</strong>
                         Years in the field<br><br>
-                        Founder &amp; full-stack developer at Inertia Digital Solutions. Laravel, Vue, React, and the hardware at the edge.
+                        Founder &amp; full-stack developer at Inertia Digital Solutions. Laravel, Vue, React, and the
+                        hardware at the edge.
                     </div>
                     <div class="cover-social">
-                        <a href="https://github.com/Baquiran" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
-                        <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
-                        <a href="https://www.facebook.com/aldrie.bqrn" target="_blank" rel="noopener noreferrer">Facebook <span>↗</span></a>
+                        <a href="https://github.com/Baquiran" target="_blank" rel="noopener noreferrer">GitHub
+                            <span>↗</span></a>
+                        <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank"
+                            rel="noopener noreferrer">LinkedIn <span>↗</span></a>
+                        <a href="https://www.facebook.com/aldrie.bqrn" target="_blank"
+                            rel="noopener noreferrer">Facebook <span>↗</span></a>
                     </div>
                 </aside>
             </section>
 
             <div class="ledger">
-                <div><div class="n">25+</div><div class="l">Projects shipped</div></div>
-                <div><div class="n">10+</div><div class="l">Clients</div></div>
-                <div><div class="n">3+</div><div class="l">Years</div></div>
-                <div><div class="n">100%</div><div class="l">Operator-first</div></div>
+                <div>
+                    <div class="n">25+</div>
+                    <div class="l">Projects shipped</div>
+                </div>
+                <div>
+                    <div class="n">10+</div>
+                    <div class="l">Clients</div>
+                </div>
+                <div>
+                    <div class="n">3+</div>
+                    <div class="l">Years</div>
+                </div>
+                <div>
+                    <div class="n">100%</div>
+                    <div class="l">Operator-first</div>
+                </div>
             </div>
 
             <section id="about-bio">
@@ -1019,9 +1682,14 @@
                         <figcaption>Fig. 01 — Baquiran, Nasugbu</figcaption>
                     </figure>
                     <div class="about-copy">
-                        <p>A web developer with three-plus years turning operational mess into software that holds: bookings, inventory, clinics, maps, sensors. Not a productized template shop — systems with edges.</p>
-                        <p class="pull">Founder &amp; Full-Stack Web Developer at Inertia Digital Solutions. Architecture to interface. Database to receipt.</p>
-                        <p>Strength across the full cycle: API design, role-based access, and interfaces people can actually run a shift on. Clean, maintainable code. High-performance delivery. Clients who need the thing live on Monday.</p>
+                        <p>A web developer with three-plus years turning operational mess into software that holds:
+                            bookings, inventory, clinics, maps, sensors. Not a productized template shop — systems with
+                            edges.</p>
+                        <p class="pull">Founder &amp; Full-Stack Web Developer at Inertia Digital Solutions.
+                            Architecture to interface. Database to receipt.</p>
+                        <p>Strength across the full cycle: API design, role-based access, and interfaces people can
+                            actually run a shift on. Clean, maintainable code. High-performance delivery. Clients who
+                            need the thing live on Monday.</p>
                         <div class="vitae">
                             <article>
                                 <dt>Studio</dt>
@@ -1048,8 +1716,10 @@
                     <h2>Certificates</h2>
                 </div>
                 <div class="clippings">
-                    <article class="clip" onclick="openImagePreview('/images/certificates/Office%20Excel%202016_page-0001.jpg', 'Microsoft Excel Certificate')">
-                        <img src="/images/certificates/Office%20Excel%202016_page-0001.jpg" alt="Microsoft Excel (Office 2016) Certificate">
+                    <article class="clip"
+                        onclick="openImagePreview('/images/certificates/Office%20Excel%202016_page-0001.jpg', 'Microsoft Excel Certificate')">
+                        <img src="/images/certificates/Office%20Excel%202016_page-0001.jpg"
+                            alt="Microsoft Excel (Office 2016) Certificate">
                         <div class="clip-body">
                             <div class="clip-meta">CertPort · BSU ARASOF · Office 2016</div>
                             <h3>Microsoft Excel</h3>
@@ -1062,8 +1732,10 @@
                             <footer><span>Issued 8 Dec 2023</span><span>View plate ↗</span></footer>
                         </div>
                     </article>
-                    <article class="clip" onclick="openImagePreview('/images/certificates/Device%20Configuration%20and%20Management_page-0001.jpg', 'Device Configuration & Management Certificate')">
-                        <img src="/images/certificates/Device%20Configuration%20and%20Management_page-0001.jpg" alt="Device Configuration and Management (Windows 10) Certificate">
+                    <article class="clip"
+                        onclick="openImagePreview('/images/certificates/Device%20Configuration%20and%20Management_page-0001.jpg', 'Device Configuration & Management Certificate')">
+                        <img src="/images/certificates/Device%20Configuration%20and%20Management_page-0001.jpg"
+                            alt="Device Configuration and Management (Windows 10) Certificate">
                         <div class="clip-body">
                             <div class="clip-meta">CertPort · BSU ARASOF · Windows 10</div>
                             <h3>Device Config &amp; Management</h3>
@@ -1076,8 +1748,10 @@
                             <footer><span>Issued 15 Dec 2025</span><span>View plate ↗</span></footer>
                         </div>
                     </article>
-                    <article class="clip" onclick="openImagePreview('/images/certificates/Networking_page-0001.jpg', 'Networking Specialist Certificate')">
-                        <img src="/images/certificates/Networking_page-0001.jpg" alt="Information Technology Specialist in Networking Certificate">
+                    <article class="clip"
+                        onclick="openImagePreview('/images/certificates/Networking_page-0001.jpg', 'Networking Specialist Certificate')">
+                        <img src="/images/certificates/Networking_page-0001.jpg"
+                            alt="Information Technology Specialist in Networking Certificate">
                         <div class="clip-body">
                             <div class="clip-meta">CertPort · BSU ARASOF · Specialist</div>
                             <h3>Networking</h3>
@@ -1102,17 +1776,20 @@
                     <article>
                         <div class="idx">01</div>
                         <h3>Frontend</h3>
-                        <p>Responsive interfaces in React and Vue. Utility-first CSS and design systems that survive a second developer.</p>
+                        <p>Responsive interfaces in React and Vue. Utility-first CSS and design systems that survive a
+                            second developer.</p>
                     </article>
                     <article>
                         <div class="idx">02</div>
                         <h3>Backend</h3>
-                        <p>PHP and Laravel. REST APIs, queues, auth, the boring reliability that keeps a register open.</p>
+                        <p>PHP and Laravel. REST APIs, queues, auth, the boring reliability that keeps a register open.
+                        </p>
                     </article>
                     <article>
                         <div class="idx">03</div>
                         <h3>Data</h3>
-                        <p>MySQL schemas that do not collapse under a month of real traffic. Queries written like they will be read.</p>
+                        <p>MySQL schemas that do not collapse under a month of real traffic. Queries written like they
+                            will be read.</p>
                     </article>
                     <article>
                         <div class="idx">04</div>
@@ -1122,25 +1799,50 @@
                     <article class="wide">
                         <div class="idx">05</div>
                         <h3>Full-stack</h3>
-                        <p>End-to-end applications with Inertia.js: server routing, controllers, a single-page feel without a second codebase to lie about.</p>
+                        <p>End-to-end applications with Inertia.js: server routing, controllers, a single-page feel
+                            without a second codebase to lie about.</p>
                     </article>
                 </div>
                 <div class="index-block">
                     <h3>Bench</h3>
                     <table class="stack-table">
-                        <tr><td>Editor</td><td>Visual Studio Code</td></tr>
-                        <tr><td>Versioning</td><td>Git</td></tr>
-                        <tr><td>Store</td><td>MySQL</td></tr>
-                        <tr><td>Framework</td><td>Laravel</td></tr>
+                        <tr>
+                            <td>Editor</td>
+                            <td>Visual Studio Code</td>
+                        </tr>
+                        <tr>
+                            <td>Versioning</td>
+                            <td>Git</td>
+                        </tr>
+                        <tr>
+                            <td>Store</td>
+                            <td>MySQL</td>
+                        </tr>
+                        <tr>
+                            <td>Framework</td>
+                            <td>Laravel</td>
+                        </tr>
                     </table>
                 </div>
                 <div class="index-block">
                     <h3>Typeset in production</h3>
                     <table class="stack-table">
-                        <tr><td>Backend</td><td>Laravel 10–12 · PHP · C++ (Arduino)</td></tr>
-                        <tr><td>Frontend</td><td>React · Vue.js 3 · Alpine.js · Tailwind CSS</td></tr>
-                        <tr><td>Glue</td><td>Inertia.js · Leaflet.js · ESP32</td></tr>
-                        <tr><td>Contracts</td><td>MySQL · REST</td></tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Laravel 10–12 · PHP · C++ (Arduino)</td>
+                        </tr>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>React · Vue.js 3 · Alpine.js · Tailwind CSS</td>
+                        </tr>
+                        <tr>
+                            <td>Glue</td>
+                            <td>Inertia.js · Leaflet.js · ESP32</td>
+                        </tr>
+                        <tr>
+                            <td>Contracts</td>
+                            <td>MySQL · REST</td>
+                        </tr>
                     </table>
                 </div>
             </section>
@@ -1166,9 +1868,11 @@
                 <div id="projectFilterModal" aria-hidden="true">
                     <div id="projectFilterModal-backdrop" data-close-project-filter></div>
                     <div id="projectFilterModal-panel" role="dialog" aria-modal="true" aria-label="Project filters">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
                             <h3>Filter</h3>
-                            <button type="button" data-close-project-filter aria-label="Close project filters">Close</button>
+                            <button type="button" data-close-project-filter
+                                aria-label="Close project filters">Close</button>
                         </div>
                         <button class="proj-tab mobile-proj-tab active" data-cat="all">All</button>
                         <button class="proj-tab mobile-proj-tab" data-cat="web">Web app</button>
@@ -1180,91 +1884,99 @@
                 <div id="projects-grid">
                     <article class="proj-card" data-cat="web" onclick="openProjectModal('tourism')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/tourism/booking-system.png" alt="Tourism Booking System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/tourism/booking-system.png" alt="Tourism Booking System"
+                                class="proj-card-thumb" loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 01 — Web application</div>
                             <h3 class="family-title">Tourism Booking System</h3>
-                            <p>End-to-end booking for multi-stop tours and local operators.</p>
+                            <p>End-to-end booking for multi-stop tours and local operators. Handles scheduling, payments, role-based dashboards, and operator reporting in one system.</p>
                             <div class="tags"><span>Laravel 11</span><span>Vue.js 3</span><span>MySQL</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="web" onclick="openProjectModal('guidedmind')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/guidedmind/platform.png" alt="GuidedMind" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/guidedmind/platform.png" alt="GuidedMind" class="proj-card-thumb"
+                                loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 02 — Education</div>
                             <h3 class="family-title">GuidedMind</h3>
-                            <p>AI-assisted student progress with guidance for teachers and students.</p>
+                            <p>AI-assisted student progress with guidance for teachers and students. Tracks performance, flags at-risk learners, and surfaces actionable insights per class.</p>
                             <div class="tags"><span>Laravel 10+</span><span>Vue.js 3</span><span>Inertia.js</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="business" onclick="openProjectModal('sales')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/sales/mapping-system.png" alt="Sales Mapping System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/sales/mapping-system.png" alt="Sales Mapping System"
+                                class="proj-card-thumb" loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 03 — Field operations</div>
                             <h3 class="family-title">Sales Mapping System</h3>
-                            <p>Live client locations, analytics, automated PDF reporting.</p>
+                            <p>Live client locations, analytics, automated PDF reporting. Field agents pin visits on a Leaflet map; managers pull coverage reports with one click.</p>
                             <div class="tags"><span>Laravel</span><span>Leaflet.js</span><span>Alpine.js</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="business" onclick="openProjectModal('pos')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/pos/inventory-system.png" alt="POS and Inventory System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/pos/inventory-system.png" alt="POS and Inventory System"
+                                class="proj-card-thumb" loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 04 — Retail</div>
                             <h3 class="family-title">POS &amp; Inventory</h3>
-                            <p>Barcode POS, live stock, sales analytics for grocery floors.</p>
+                            <p>Barcode POS, live stock, sales analytics for grocery floors. Handles transactions, returns, reorder alerts, and daily sales summaries.</p>
                             <div class="tags"><span>Laravel</span><span>React</span><span>Inertia.js</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="iot" onclick="openProjectModal('gasguard')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/gasguard/iot-system.png" alt="GasGuard IoT Monitoring System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/gasguard/iot-system.png" alt="GasGuard IoT Monitoring System"
+                                class="proj-card-thumb" loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 05 — IoT &amp; safety</div>
                             <h3 class="family-title">GasGuard</h3>
-                            <p>ESP32 leak detection, live dashboard, instant alerts.</p>
+                            <p>ESP32 leak detection, live dashboard, instant alerts. Monitors LPG levels in real time and pushes SMS notifications before thresholds are breached.</p>
                             <div class="tags"><span>ESP32</span><span>C++ (Arduino)</span><span>PHP</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="web" onclick="openProjectModal('clinic')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/clinic/system.png" alt="School Clinic System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/clinic/system.png" alt="School Clinic System" class="proj-card-thumb"
+                                loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 06 — Healthcare</div>
                             <h3 class="family-title">School Clinic System</h3>
-                            <p>Triage, records, and medicine inventory for KCCF.</p>
+                            <p>Triage, records, and medicine inventory for KCCF. School nurse logs consultations, tracks student health history, and monitors medicine stock levels.</p>
                             <div class="tags"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="iot" onclick="openProjectModal('airsafe')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/airsafe/main.png" alt="AirSafe Nasugbu" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/airsafe/main.png" alt="AirSafe Nasugbu" class="proj-card-thumb"
+                                loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 07 — IoT</div>
                             <h3 class="family-title">AirSafe Nasugbu</h3>
-                            <p>Air quality and heat index across sensors, maps, and roles.</p>
+                            <p>Air quality and heat index across sensors, maps, and roles. Multi-node ESP32 network feeds a live Leaflet dashboard with public and admin views.</p>
                             <div class="tags"><span>Laravel 12</span><span>React 18</span><span>Leaflet.js</span></div>
                             <div class="read-more">Open the feature →</div>
                         </div>
                     </article>
                     <article class="proj-card" data-cat="web" onclick="openProjectModal('azurehaven')">
                         <div class="proj-card-thumb-wrap">
-                            <img src="/images/azurehaven/hero.png" alt="Azure Haven Resort Booking System" class="proj-card-thumb" loading="lazy">
+                            <img src="/images/azurehaven/hero.png" alt="Azure Haven Resort Booking System"
+                                class="proj-card-thumb" loading="lazy">
                         </div>
                         <div class="proj-copy">
                             <div class="proj-no">No. 08 — Standalone</div>
@@ -1296,13 +2008,15 @@
                             <span class="k">Facebook</span>
                             <span class="v">Aldrie Baquiran</span>
                         </a>
-                        <a href="https://maps.google.com/?q=Bgry.+Papaya,+Nasugbu,+Batangas,+Philippines" target="_blank" rel="noopener noreferrer">
+                        <a href="https://maps.google.com/?q=Bgry.+Papaya,+Nasugbu,+Batangas,+Philippines"
+                            target="_blank" rel="noopener noreferrer">
                             <span class="k">Desk</span>
                             <span class="v">Brgy. Papaya, Nasugbu, Batangas, Philippines</span>
                         </a>
                     </div>
                     <form class="contact-form">
-                        <input type="text" name="bot_honeypot" tabindex="-1" autocomplete="off" style="display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important;">
+                        <input type="text" name="bot_honeypot" tabindex="-1" autocomplete="off"
+                            style="display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important;">
                         <label>Name</label>
                         <input type="text" name="from_name" required>
                         <label>Email</label>
@@ -1330,7 +2044,8 @@
             </nav>
             <div>
                 <a href="https://github.com/Baquiran" target="_blank" rel="noopener noreferrer">GitHub</a><br>
-                <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank" rel="noopener noreferrer">LinkedIn</a><br>
+                <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank"
+                    rel="noopener noreferrer">LinkedIn</a><br>
                 <a href="https://www.facebook.com/aldrie.bqrn" target="_blank" rel="noopener noreferrer">Facebook</a>
             </div>
             <div class="colophon-end" style="grid-column:1/-1;">
@@ -1349,7 +2064,8 @@
 
     <div id="imagePreviewModal" class="hidden">
         <div class="veil" onclick="closeImagePreview()"></div>
-        <button class="preview-close" onclick="closeImagePreview()" aria-label="Close image preview"><i class="fas fa-times"></i></button>
+        <button class="preview-close" onclick="closeImagePreview()" aria-label="Close image preview"><i
+                class="fas fa-times"></i></button>
         <img id="previewImage" src="" alt="">
     </div>
 
@@ -1399,23 +2115,23 @@
 
         const modal = document.getElementById('imagePreviewModal');
         const pImg = document.getElementById('previewImage');
-        window.openImagePreview = function(src, title) {
+        window.openImagePreview = function (src, title) {
             pImg.src = src;
             pImg.alt = title || '';
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         };
-        window.closeImagePreview = function() {
+        window.closeImagePreview = function () {
             modal.classList.add('hidden');
             document.body.style.overflow = '';
             setTimeout(() => { pImg.src = ''; }, 200);
         };
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeImagePreview();
         });
 
-        (function() { emailjs.init("rwx2jFbjcDNdbhD_R"); })();
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        (function () { emailjs.init("rwx2jFbjcDNdbhD_R"); })();
+        document.querySelector('.contact-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const honeypot = this.querySelector('input[name="bot_honeypot"]');
             if (honeypot && honeypot.value !== '') {
@@ -1498,7 +2214,7 @@
         });
         if (mobileProjectFilterBtn) mobileProjectFilterBtn.addEventListener('click', openProjectFilterModal);
         projectFilterModal.querySelectorAll('[data-close-project-filter]').forEach(el => el.addEventListener('click', closeProjectFilterModal));
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && projectFilterModal.classList.contains('open')) closeProjectFilterModal();
         });
         applyProjectFilter('all');
@@ -1587,7 +2303,7 @@
         };
 
         const projModal = document.getElementById('projectModal');
-        window.openProjectModal = function(id) {
+        window.openProjectModal = function (id) {
             const p = PROJECT_DATA[id];
             if (!p) return;
             const solutionHTML = p.solution.map(s => `<li>${s}</li>`).join('');
@@ -1633,11 +2349,11 @@
             projModal.classList.add('open');
             document.body.style.overflow = 'hidden';
         };
-        window.closeProjectModal = function() {
+        window.closeProjectModal = function () {
             projModal.classList.remove('open');
             document.body.style.overflow = '';
         };
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && projModal.classList.contains('open')) closeProjectModal();
         });
 
@@ -1685,4 +2401,5 @@
         })();
     </script>
 </body>
+
 </html>

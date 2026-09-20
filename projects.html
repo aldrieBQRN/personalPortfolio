@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full antialiased" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Theme initialization before paint to prevent flash -->
+  <script>
+    try {
+      var theme = localStorage.getItem("theme");
+      if (theme !== "light" && theme !== "dark") {
+        theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    } catch (e) {}
+  </script>
+
+  <title>Projects — John Aldrie T. Baquiran</title>
+  <meta name="description" content="Selected web, mobile, and IoT systems built by John Aldrie T. Baquiran." />
+  <meta name="author" content="John Aldrie T. Baquiran" />
+  <link rel="canonical" href="https://johnaldriebaquiran.vercel.app/projects.html" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Projects — John Aldrie T. Baquiran" />
+  <meta property="og:description" content="Selected web, mobile, and IoT systems built by John Aldrie T. Baquiran." />
+  <meta property="og:image" content="https://johnaldriebaquiran.vercel.app/images/profile.webp" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- EmailJS & SweetAlert2 for Contact Modal -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="resume-data.js"></script>
+
+  <!-- Google Fonts: Saira Condensed, Chakra Petch, Instrument Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Saira+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            condensed: ['"Saira Condensed"', 'sans-serif'],
+            chakra: ['"Chakra Petch"', 'monospace'],
+            sans: ['"Instrument Sans"', 'sans-serif'],
+          },
+          colors: {
+            background: 'var(--paper)',
+            surface: 'var(--surface)',
+            foreground: 'var(--foreground)',
+            accent: 'var(--accent)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM TOKENS (Weave Inspiration)
+       ============================================================ */
+    :root {
+      --paper: #fafafa;
+      --surface: #ffffff;
+      --foreground: #0a0a0a;
+      --weave-rule: rgba(0, 0, 0, 0.09);
+      --weave-rule-strong: rgba(0, 0, 0, 0.22);
+      --glass: rgba(250, 250, 250, 0.85);
+      --accent: #E2793F;
+      --accent-soft: rgba(226, 121, 63, 0.12);
+      --accent-hover: #c9622a;
+    }
+
+    [data-theme="dark"] {
+      --paper: #0a0a0c;
+      --surface: #121216;
+      --foreground: #f4f4f6;
+      --weave-rule: rgba(255, 255, 255, 0.09);
+      --weave-rule-strong: rgba(255, 255, 255, 0.22);
+      --glass: rgba(10, 10, 12, 0.85);
+      --accent: #E2793F;
+      --accent-soft: rgba(226, 121, 63, 0.15);
+      --accent-hover: #f08950;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--foreground);
+      font-family: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .shell {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding-left: 3.5rem;
+        padding-right: 3.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .shell {
+        padding-left: 5rem;
+        padding-right: 5rem;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .shell {
+        padding-left: 6rem;
+        padding-right: 6rem;
+      }
+    }
+
+    /* Custom Scrollbar (Page & Scrollable Elements like Sidebar) */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--weave-rule-strong) transparent;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--weave-rule-strong);
+      border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Theme toggle button — explicit hover/active */
+    .theme-btn {
+      transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+      outline: none;
+    }
+    .theme-btn:hover {
+      background-color: var(--weave-rule);
+      color: var(--foreground);
+    }
+    .theme-btn:active {
+      background-color: var(--weave-rule);
+      color: var(--foreground);
+      transform: scale(0.9);
+    }
+    .theme-btn[aria-pressed="true"] {
+      background-color: var(--weave-rule);
+      color: var(--foreground);
+    }
+    .theme-btn[aria-pressed="true"]:hover {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen flex-col selection:bg-[var(--accent)] selection:text-white">
+
+  <!-- ============================================================
+       TOP NAVIGATION BAR
+       ============================================================ -->
+  <header id="top" class="animate-fade-in-down sticky top-0 z-50 w-full shrink-0 bg-[var(--glass)] backdrop-blur-md backdrop-saturate-150 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[linear-gradient(to_right,transparent,var(--weave-rule)_12%,var(--weave-rule)_88%,transparent)]">
+    <nav class="shell flex h-16 items-center justify-between sm:h-20">
+      
+      <!-- Brand Logo / Monogram -->
+      <a href="index.html" aria-label="John Aldrie Baquiran — home" class="shrink-0 flex items-center gap-2 group">
+        <span class="font-condensed text-2xl sm:text-3xl font-extrabold tracking-tight uppercase transition-colors group-hover:text-[var(--accent)]">
+          Aldrie<span class="text-[var(--accent)]">.</span>
+        </span>
+      </a>
+
+      <!-- Right Nav Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- Theme Switcher Pill (System / Light / Dark) -->
+        <div class="hidden items-center gap-2 sm:flex sm:gap-3">
+          <div role="group" aria-label="Theme" class="flex h-9 items-stretch gap-0.5 rounded-full border border-[var(--weave-rule)] p-1 sm:h-10">
+            <!-- System -->
+            <button type="button" id="theme-system-btn" aria-label="System theme" title="System theme" aria-pressed="false" class="theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 text-foreground/40 hover:text-foreground hover:bg-foreground/10 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true" height="1em" width="1em">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </button>
+            <!-- Light -->
+            <button type="button" id="theme-light-btn" aria-label="Light theme" title="Light theme" aria-pressed="false" class="theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 text-foreground/40 hover:text-foreground hover:bg-foreground/10 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true" height="1em" width="1em">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+            <!-- Dark -->
+            <button type="button" id="theme-dark-btn" aria-label="Dark theme" title="Dark theme" aria-pressed="false" class="theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 text-foreground/40 hover:text-foreground hover:bg-foreground/10 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true" height="1em" width="1em">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Menu Toggle Button -->
+        <button type="button" id="menu-toggle-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-menu" class="grid size-11 place-items-center rounded-full border border-[var(--weave-rule)] text-foreground/70 transition-colors hover:bg-foreground/10 hover:text-foreground sm:size-12">
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-5" aria-hidden="true" height="1em" width="1em">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- Header Scroll Progress Line -->
+    <div id="scroll-progress-line" aria-hidden="true" style="transform: scaleX(0);" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-0.5 origin-left bg-[var(--accent)] transition-transform duration-75"></div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT: PROJECTS ARCHIVE
+       ============================================================ -->
+  <main class="shell pb-16">
+    <div class="pt-8 md:pt-10">
+      <a href="index.html" class="group inline-flex items-center gap-2 text-xs font-chakra font-bold tracking-[0.15em] text-foreground/60 uppercase transition-colors hover:text-foreground">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5 transition-transform group-hover:-translate-x-1" aria-hidden="true" height="1em" width="1em">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Main Portfolio</span>
+      </a>
+    </div>
+
+    <header class="py-10 md:py-12">
+      <p class="text-xs tracking-[0.25em] text-foreground/40 uppercase font-semibold">Selected work</p>
+      <h1 class="mt-4 font-condensed text-5xl font-extrabold tracking-tight uppercase sm:text-6xl lg:text-7xl text-foreground">
+        Projects
+      </h1>
+      <hr class="mt-8 h-px max-w-2xl border-0 bg-[var(--weave-rule)]" />
+      <p class="mt-8 max-w-xl text-base leading-relaxed text-foreground/70 sm:text-lg">
+        Things I've designed, built, and shipped — web applications, mobile platforms, and IoT telemetry systems.
+      </p>
+    </header>
+
+    <!-- 3-Column Projects Grid Matching Reference -->
+    <ul class="grid grid-cols-1 border-t border-l border-[var(--weave-rule)] sm:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- Project 01: AirSafe Nasugbu -->
+      <li class="flex">
+        <article onclick="openProjectModal('airsafe')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">01</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2025</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/airsafe/main.webp" alt="AirSafe Nasugbu" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            AirSafe Nasugbu
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Real-time air quality and heat index monitoring system with distributed IoT hardware nodes, GIS mapping, and municipal public dashboard.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Laravel 12</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">React 18</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Inertia.js 2.0</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Tailwind CSS</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 02: Tourism Booking System -->
+      <li class="flex">
+        <article onclick="openProjectModal('tourism')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">02</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/tourism/booking-system.webp" alt="Tourism Booking System" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            Tourism Booking System
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Comprehensive resort &amp; tour reservation platform with real-time availability, online payment integration, and automated PDF confirmations.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Laravel 11</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Vue.js 3</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Inertia.js</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">MySQL</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 03: GuidedMind -->
+      <li class="flex">
+        <article onclick="openProjectModal('guidedmind')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">03</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/guidedmind/platform.webp" alt="GuidedMind" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            GuidedMind
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            AI-assisted student progress monitoring platform with personalized learning guidance for teachers and students to detect at-risk indicators early.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Laravel 10+</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Vue.js 3</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Inertia.js</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">MySQL</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 04: POS and Inventory System -->
+      <li class="flex">
+        <article onclick="openProjectModal('pos')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">04</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/pos/inventory-system.webp" alt="POS and Inventory System" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            POS and Inventory System
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Fast POS terminal with barcode scanning, automated stock level deductions, supplier ordering alerts, and sales analytics.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Laravel</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">React</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Inertia.js</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">MySQL</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 05: Azure Haven Resort -->
+      <li class="flex">
+        <article onclick="openProjectModal('azurehaven')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">05</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/azurehaven/hero.webp" alt="Azure Haven Resort" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            Azure Haven Resort
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Standalone luxury resort reservation system with client-side data persistence, dynamic calendar availability, and guest lookup.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Next.js 14</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">React 18</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">TypeScript</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Tailwind CSS</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 06: Marrow Cafe -->
+      <li class="flex">
+        <article onclick="openProjectModal('marrowcafe')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">06</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2023</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/marrowcafe/hero.webp" alt="Marrow Cafe" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            Marrow Cafe
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            High-performance landing page for a neighborhood coffee &amp; milk tea shop with brand story, dynamic drinks menu, and customer reviews.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">HTML5</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Vanilla CSS</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">JavaScript ES6+</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Responsive Design</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 07: School Clinic System -->
+      <li class="flex">
+        <article onclick="openProjectModal('clinic')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">07</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2023</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/clinic/system.webp" alt="School Clinic System" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            School Clinic System
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Comprehensive health management system with student triage, medical history logging, and medicine inventory tracking.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">PHP 7.4+</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">MySQL</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">HTML5 &amp; CSS3</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">JavaScript ES6+</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 08: Sales Mapping System -->
+      <li class="flex">
+        <article onclick="openProjectModal('sales')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">08</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/sales/mapping-system.webp" alt="Sales Mapping System" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            Sales Mapping System
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            Interactive live map with regional clustering, real-time client location tracking, and centralized analytics dashboard.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Laravel</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Tailwind CSS</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Leaflet.js</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">Alpine.js</li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Project 09: GasGuard IoT Monitoring System -->
+      <li class="flex">
+        <article onclick="openProjectModal('gasguard')" class="group flex w-full flex-col border-r border-b border-[var(--weave-rule)] p-6 transition-colors hover:bg-foreground/[0.03] lg:p-8 cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-[10px] tracking-[0.25em] text-foreground/30 tabular-nums font-mono">09</span>
+            <span class="flex items-center gap-2 text-[10px] tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+              <span aria-hidden="true" class="size-1.5 shrink-0 bg-[var(--accent)]"></span>
+              Live<span aria-hidden="true" class="text-foreground/20">/</span><span class="tabular-nums">2024</span>
+            </span>
+          </div>
+
+          <div class="mt-4 aspect-video overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+            <img src="images/gasguard/iot-system.webp" alt="GasGuard IoT Monitoring System" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+          </div>
+
+          <h2 class="mt-5 font-condensed text-2xl font-bold tracking-tight uppercase sm:text-3xl text-foreground group-hover:text-[var(--accent)] transition-colors">
+            GasGuard IoT Monitoring System
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-foreground/60 line-clamp-3">
+            ESP32-based combustible gas leak detection system featuring instant audible alarms, cloud telemetry, and real-time dashboard notifications.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">C++ (Arduino)</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">ESP32 &amp; IoT</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">PHP</li>
+            <li class="border border-[var(--weave-rule)] px-2.5 py-1 text-[11px] tracking-wide text-foreground/50">MySQL</li>
+          </ul>
+        </article>
+      </li>
+
+    </ul>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="mt-auto shrink-0 border-t border-[var(--weave-rule)] bg-[var(--paper)]">
+    <div class="shell">
+      <div class="grid gap-12 py-14 md:grid-cols-[minmax(0,1fr)_auto] md:gap-20 md:py-20">
+        
+        <!-- Bio & Contact Info -->
+        <div>
+          <a aria-label="John Aldrie Baquiran — home" href="index.html" class="inline-block">
+            <span class="font-condensed text-2xl sm:text-3xl font-extrabold tracking-tight uppercase">
+              Aldrie<span class="text-[var(--accent)]">.</span>
+            </span>
+          </a>
+          <p class="mt-4 max-w-sm text-sm leading-relaxed text-foreground/60">
+            Founder &amp; Full-Stack Web Developer at Inertia Digital Solutions. Building modern, high-performance web applications with Laravel, React, and Vue.js. Open to work and always up for a good challenge.
+          </p>
+          <a href="mailto:aldriebaquiran15@gmail.com" class="mt-6 inline-flex items-center gap-2 text-sm text-foreground/60 transition-colors hover:text-foreground">
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true" height="1em" width="1em">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            aldriebaquiran15@gmail.com
+          </a>
+
+          <!-- Social Buttons -->
+          <ul class="mt-8 flex flex-wrap gap-2.5">
+            <li>
+              <a href="https://github.com/Baquiran" target="_blank" rel="noreferrer" aria-label="GitHub Profile" class="grid size-10 place-items-center border border-[var(--weave-rule)] text-foreground/60 transition-colors hover:border-foreground/40 hover:text-foreground">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" class="size-4" aria-hidden="true" height="1em" width="1em">
+                  <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank" rel="noreferrer" aria-label="LinkedIn Profile" class="grid size-10 place-items-center border border-[var(--weave-rule)] text-foreground/60 transition-colors hover:border-foreground/40 hover:text-foreground">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="size-4" aria-hidden="true" height="1em" width="1em">
+                  <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sitemap Navigation -->
+        <nav aria-label="Footer Sitemap">
+          <p class="text-xs tracking-[0.25em] text-foreground/40 uppercase font-semibold">Sitemap</p>
+          <ul class="mt-6 grid grid-cols-2 gap-x-12 gap-y-3.5">
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-foreground/60 uppercase transition-colors hover:text-foreground" href="index.html#top">
+                Home
+              </a>
+            </li>
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-[var(--accent)] uppercase" href="projects.html">
+                Projects
+              </a>
+            </li>
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-foreground/60 uppercase transition-colors hover:text-foreground" href="experience.html">
+                Experience
+              </a>
+            </li>
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-foreground/60 uppercase transition-colors hover:text-foreground" href="credentials.html">
+                Certifications
+              </a>
+            </li>
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-foreground/60 uppercase transition-colors hover:text-foreground" href="index.html#stack">
+                Stack
+              </a>
+            </li>
+            <li>
+              <a class="font-condensed text-lg font-bold tracking-tight text-foreground/60 uppercase transition-colors hover:text-foreground cursor-pointer" href="resume.pdf" onclick="downloadResume(event)" download="John_Aldrie_Baquiran_Resume.pdf">
+                Resume
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="flex flex-col-reverse gap-4 border-t border-[var(--weave-rule)] py-6 text-xs tracking-[0.12em] text-foreground/40 uppercase sm:flex-row sm:items-center sm:justify-between">
+        <p>© 2026 John Aldrie T. Baquiran</p>
+        <a href="#top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" aria-label="Back to top" class="group inline-flex items-center gap-2 self-start transition-colors hover:text-foreground sm:self-auto cursor-pointer">
+          <span>Back to top</span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5 transition-transform group-hover:-translate-y-1" aria-hidden="true" height="1em" width="1em">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       INTERACTIVE MODALS
+       ============================================================ -->
+
+  <!-- 1. PROJECT DETAIL MODAL -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" aria-modal="true" role="dialog">
+    <div class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-6 sm:p-8 shadow-2xl rounded-sm">
+      <button type="button" onclick="closeProjectModal()" aria-label="Close project modal" class="absolute top-5 right-5 text-foreground/50 hover:text-foreground">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-6">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div id="projectModalContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CERTIFICATE IMAGE PREVIEW MODAL -->
+  <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" aria-modal="true" role="dialog">
+    <div class="relative max-w-3xl w-full bg-surface border border-[var(--weave-rule)] p-4 sm:p-6 shadow-2xl rounded-sm text-center">
+      <button type="button" onclick="closeImageModal()" aria-label="Close preview" class="absolute top-4 right-4 text-foreground/50 hover:text-foreground">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-6">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h3 id="imageModalTitle" class="font-condensed text-xl font-bold uppercase tracking-tight mb-4 text-foreground text-left">
+        Preview
+      </h3>
+      <div class="overflow-hidden border border-[var(--weave-rule)] bg-black/5 dark:bg-white/5">
+        <img id="imageModalImg" src="" alt="Preview" class="w-full max-h-[75vh] object-contain mx-auto" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MOBILE & DESKTOP SLIDE-OUT NAVIGATION DRAWER (#site-menu) -->
+  <!-- Backdrop -->
+  <div id="siteMenuBackdrop" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none" onclick="closeSiteMenu()" aria-hidden="true"></div>
+
+  <!-- Drawer Aside -->
+  <aside id="site-menu" aria-label="Site navigation" role="dialog" aria-modal="true" class="fixed inset-y-0 right-0 z-50 flex w-full max-w-md sm:max-w-lg flex-col justify-between overflow-y-auto bg-surface border-l border-[var(--weave-rule)] p-6 sm:p-8 shadow-2xl transition-transform duration-300 ease-out translate-x-full">
+    
+    <!-- Top Bar: Header & Close Button -->
+    <div>
+      <div class="flex items-center justify-between border-b border-[var(--weave-rule)] pb-4 sm:pb-5">
+        <span class="font-chakra text-[11px] font-bold tracking-[0.2em] text-foreground/50 uppercase">Navigation Menu</span>
+        <button type="button" onclick="closeSiteMenu()" aria-label="Close navigation menu" class="grid size-9 sm:size-10 place-items-center rounded-full border border-[var(--weave-rule)] text-foreground/60 transition-colors hover:border-foreground/40 hover:text-foreground">
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Main Navigation Links -->
+      <nav aria-label="Drawer Links" class="mt-4 sm:mt-6 flex flex-col">
+        <!-- 01 Home -->
+        <a href="index.html#top" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 transition-colors hover:text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-foreground/40 tabular-nums">01</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Home</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-foreground/40 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- 02 Projects (Active) -->
+        <a href="projects.html" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 transition-colors text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-[var(--accent)] tabular-nums">02</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Projects</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-[var(--accent)] transition-transform group-hover:translate-x-1">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- 03 Experience -->
+        <a href="experience.html" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 transition-colors hover:text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-foreground/40 tabular-nums">03</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Experience</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-foreground/40 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- 04 Certifications -->
+        <a href="credentials.html" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 transition-colors hover:text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-foreground/40 tabular-nums">04</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Certifications</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-foreground/40 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- 05 Stack -->
+        <a href="index.html#stack" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 transition-colors hover:text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-foreground/40 tabular-nums">05</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Stack</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-foreground/40 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- 06 Contact -->
+        <button type="button" onclick="closeSiteMenu(); openContactModal();" class="drawer-nav-item group flex items-baseline justify-between border-b border-[var(--weave-rule)] py-3.5 sm:py-4 text-left transition-colors hover:text-[var(--accent)]">
+          <span class="flex items-baseline gap-3 sm:gap-4">
+            <span class="font-chakra text-xs text-foreground/40 tabular-nums">06</span>
+            <span class="font-condensed text-2xl sm:text-3xl font-bold uppercase tracking-tight">Contact</span>
+          </span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-foreground/40 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Bottom Sections: Preferences & Connect -->
+    <div class="mt-8 pt-6 border-t border-[var(--weave-rule)] flex flex-col gap-6">
+      
+      <!-- Preferences: Theme Switcher -->
+      <div>
+        <p class="text-[10px] font-chakra font-bold tracking-[0.2em] text-foreground/40 uppercase mb-3">Preferences</p>
+        <div class="flex items-center justify-between border border-[var(--weave-rule)] p-2.5 rounded-sm bg-background/50">
+          <span class="text-xs font-medium text-foreground/70 font-chakra uppercase tracking-wider">Theme</span>
+          <div role="group" aria-label="Theme selection" class="flex items-stretch gap-0.5 rounded-full border border-[var(--weave-rule)] p-1 bg-surface">
+            <!-- Drawer System Theme Button -->
+            <button type="button" id="drawer-theme-system-btn" aria-label="System theme" title="System theme" aria-pressed="false" class="theme-btn grid size-7 place-items-center rounded-full cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </button>
+            <!-- Drawer Light Theme Button -->
+            <button type="button" id="drawer-theme-light-btn" aria-label="Light theme" title="Light theme" aria-pressed="false" class="theme-btn grid size-7 place-items-center rounded-full cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+            <!-- Drawer Dark Theme Button -->
+            <button type="button" id="drawer-theme-dark-btn" aria-label="Dark theme" title="Dark theme" aria-pressed="false" class="theme-btn grid size-7 place-items-center rounded-full cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connect: Social & Email Links -->
+      <div>
+        <p class="text-[10px] font-chakra font-bold tracking-[0.2em] text-foreground/40 uppercase mb-3">Connect</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://github.com/Baquiran" target="_blank" rel="noreferrer" class="flex items-center justify-between border border-[var(--weave-rule)] p-2.5 text-xs text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground">
+            <span class="font-chakra font-medium">GitHub</span>
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-foreground/40">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank" rel="noreferrer" class="flex items-center justify-between border border-[var(--weave-rule)] p-2.5 text-xs text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground">
+            <span class="font-chakra font-medium">LinkedIn</span>
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-foreground/40">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <div class="mt-2">
+          <a href="mailto:aldriebaquiran15@gmail.com" class="flex items-center justify-between border border-[var(--weave-rule)] p-2.5 text-xs text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground">
+            <span class="font-chakra font-medium truncate">aldriebaquiran15@gmail.com</span>
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-foreground/40 shrink-0 ml-2">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Download Resume & Send Email Actions in Drawer -->
+        <div class="mt-4 flex gap-2">
+          <a href="resume.pdf" onclick="downloadResume(event)" download="John_Aldrie_Baquiran_Resume.pdf" class="font-chakra flex-1 inline-flex h-9 items-center justify-center gap-2 bg-foreground text-background text-[10px] font-bold tracking-[0.12em] uppercase transition-opacity hover:opacity-85 cursor-pointer">
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Resume</span>
+          </a>
+          <button type="button" onclick="closeSiteMenu(); openContactModal();" class="font-chakra flex-1 inline-flex h-9 items-center justify-center gap-2 border border-[var(--weave-rule)] text-foreground/80 text-[10px] font-bold tracking-[0.12em] uppercase transition-colors hover:border-foreground/40 hover:text-foreground">
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>Send Email</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </aside>
+
+  <!-- 4. CONTACT FORM MODAL -->
+  <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" aria-modal="true" role="dialog">
+    <div class="relative w-full max-w-xl max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-6 sm:p-8 shadow-2xl rounded-sm">
+      <button type="button" onclick="closeContactModal()" aria-label="Close contact modal" class="absolute top-5 right-5 text-foreground/50 hover:text-foreground">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-6">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div>
+        <p class="font-chakra text-[10px] font-bold tracking-[0.2em] text-[var(--accent)] uppercase">Available for Work</p>
+      </div>
+
+      <h3 class="font-condensed text-3xl sm:text-4xl font-extrabold uppercase tracking-tight mt-1 text-foreground">
+        Send a Message
+      </h3>
+      <p class="mt-1.5 text-xs text-foreground/60 leading-relaxed">
+        Have a project in mind, a freelance inquiry, or just want to connect? Send a note directly or reach me at <a href="mailto:aldriebaquiran15@gmail.com" class="text-[var(--accent)] hover:underline font-medium">aldriebaquiran15@gmail.com</a>.
+      </p>
+
+      <!-- Contact Form -->
+      <form id="contactForm" class="mt-6 space-y-4">
+        <!-- Anti-spam Honeypot -->
+        <input type="text" name="bot_honeypot" id="bot_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="from_name" class="font-chakra text-[10px] font-bold tracking-[0.15em] uppercase text-foreground/70 mb-1.5 block">
+              Your Name <span class="text-[var(--accent)]">*</span>
+            </label>
+            <input type="text" id="from_name" name="from_name" required placeholder="e.g. Jane Doe" class="w-full bg-background border border-[var(--weave-rule)] px-3.5 py-2.5 text-xs text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/60 transition-colors" />
+          </div>
+
+          <div>
+            <label for="from_email" class="font-chakra text-[10px] font-bold tracking-[0.15em] uppercase text-foreground/70 mb-1.5 block">
+              Your Email <span class="text-[var(--accent)]">*</span>
+            </label>
+            <input type="email" id="from_email" name="from_email" required placeholder="e.g. jane@example.com" class="w-full bg-background border border-[var(--weave-rule)] px-3.5 py-2.5 text-xs text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/60 transition-colors" />
+          </div>
+        </div>
+
+        <div>
+          <label for="subject" class="font-chakra text-[10px] font-bold tracking-[0.15em] uppercase text-foreground/70 mb-1.5 block">
+            Subject <span class="text-[var(--accent)]">*</span>
+          </label>
+          <input type="text" id="subject" name="subject" required placeholder="e.g. Project Inquiry / Freelance Opportunity" class="w-full bg-background border border-[var(--weave-rule)] px-3.5 py-2.5 text-xs text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/60 transition-colors" />
+        </div>
+
+        <div>
+          <label for="message" class="font-chakra text-[10px] font-bold tracking-[0.15em] uppercase text-foreground/70 mb-1.5 block">
+            Message <span class="text-[var(--accent)]">*</span>
+          </label>
+          <textarea id="message" name="message" required rows="4" placeholder="Tell me about your project, timeline, deliverables, or questions..." class="w-full bg-background border border-[var(--weave-rule)] px-3.5 py-2.5 text-xs text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/60 transition-colors resize-none"></textarea>
+        </div>
+
+        <!-- Form Actions & Submission Button -->
+        <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[var(--weave-rule)]">
+          <div class="flex items-center gap-3">
+            <a href="https://www.linkedin.com/in/aldrie-baquiran" target="_blank" rel="noreferrer" class="text-foreground/50 hover:text-foreground text-[11px] font-chakra uppercase tracking-wider flex items-center gap-1 transition-colors">
+              <svg stroke="currentColor" fill="currentColor" viewBox="0 0 448 512" class="size-3"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+              <span>LinkedIn</span>
+            </a>
+            <span class="text-foreground/20">•</span>
+            <a href="https://github.com/Baquiran" target="_blank" rel="noreferrer" class="text-foreground/50 hover:text-foreground text-[11px] font-chakra uppercase tracking-wider flex items-center gap-1 transition-colors">
+              <svg stroke="currentColor" fill="currentColor" viewBox="0 0 496 512" class="size-3"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+
+          <div class="flex items-center justify-end gap-2">
+            <button type="button" onclick="closeContactModal()" class="font-chakra px-4 py-2.5 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40 transition-colors">
+              Cancel
+            </button>
+
+            <button type="submit" id="contactSubmitBtn" class="font-chakra inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-[0.15em] uppercase transition-all hover:opacity-85 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+              <span id="contactSubmitText">Send Message</span>
+              <svg id="contactSubmitIcon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       INTERACTIVE LOGIC
+       ============================================================ -->
+  <script>
+    // ----------------------------------------------------------------
+    // 1. Projects Data Store (With Mockups, Live Site, & Source Code)
+    // ----------------------------------------------------------------
+    const projectsData = {
+      airsafe: {
+        title: "AirSafe Nasugbu",
+        category: "IoT & Environmental",
+        image: "images/airsafe/main.webp",
+        visit: "https://airsafe-nasugbu.freedev.app/",
+        github: "https://github.com/aldrieBQRN/airsafe-nasugbu",
+        stack: ["Laravel 12", "React 18", "Inertia.js 2.0", "Tailwind CSS", "Leaflet.js"],
+        status: "Live Deployment",
+        summary: "Nasugbu municipality lacked real-time air quality monitoring across districts. AirSafe Nasugbu provides real-time AQI and heat index monitoring from distributed IoT sensors, multi-role dashboards, and interactive GIS mapping.",
+        highlights: [
+          "Real-time AQI and heat index monitoring from distributed IoT sensors.",
+          "Multi-role dashboards (Admin, Barangay Officials, Public Portal).",
+          "Interactive Leaflet maps showing sensor locations and live data.",
+          "Historical trending data and 7-day analytics.",
+          "Alert system for hazardous air quality levels.",
+          "Automated report generation with data export capabilities.",
+          "Personal access tokens for secure IoT device integration.",
+          "Role-based access control with barangay-specific filtering."
+        ],
+        screens: [
+          ["images/airsafe/screen-1.webp", "Public Dashboard"],
+          ["images/airsafe/screen-2.webp", "Admin Panel"],
+          ["images/airsafe/screen-3.webp", "Real-time Map"],
+          ["images/airsafe/screen-4.webp", "Air Quality Alerts"],
+          ["images/airsafe/screen-5.webp", "Analytics Reports"],
+          ["images/airsafe/screen-6.webp", "Device Management"]
+        ]
+      },
+      tourism: {
+        title: "Tourism Booking System",
+        category: "Web Application",
+        image: "images/tourism/booking-system.webp",
+        visit: "https://papayabeach.page.gd",
+        github: "https://github.com/aldrieBQRN/tourism-booking",
+        stack: ["Laravel 11", "Vue.js 3", "Inertia.js", "MySQL", "Tailwind CSS"],
+        status: "Live in Use",
+        summary: "No unified booking flow for multi-stop tours existed. Operators relied on phone calls and manual tracking, causing double bookings and missed revenue. This unified reservation platform features real-time availability, online payments, and automated PDF confirmations.",
+        highlights: [
+          "Unified reservation system with real-time availability.",
+          "Online payment integration and automated PDF confirmations.",
+          "Admin dashboard for packages, bookings, and revenue.",
+          "Mobile-responsive tourist-facing booking portal."
+        ],
+        screens: [
+          ["images/tourism/screen-1.webp", "Tourism Home Screen"],
+          ["images/tourism/screen-2.webp", "Tourism Booking Screen"],
+          ["images/tourism/screen-3.webp", "Tourism Tours Screen"],
+          ["images/tourism/screen-4.webp", "Tourism Dashboard Screen"],
+          ["images/tourism/screen-5.webp", "Tourism Profile Screen"],
+          ["images/tourism/screen-6.webp", "Tourism Settings Screen"]
+        ]
+      },
+      guidedmind: {
+        title: "GuidedMind",
+        category: "Educational Platform",
+        image: "images/guidedmind/platform.webp",
+        visit: "https://guidedmind.page.gd",
+        github: "https://github.com/aldrieBQRN/guidedmind",
+        stack: ["Laravel 10+", "Vue.js 3", "Inertia.js", "MySQL"],
+        status: "Live in Use",
+        summary: "Manual student progress tracking and lack of personalized guidance made it difficult for teachers to identify at-risk students. GuidedMind provides interactive learning modules with progress tracking and an AI-powered Freedom Wall for personalized guidance.",
+        highlights: [
+          "Interactive learning modules with progress tracking.",
+          "AI-powered Freedom Wall for personalized guidance.",
+          "Real-time student progress monitoring dashboard.",
+          "Risk detection and priority alerts for at-risk students.",
+          "Teacher analytics with class performance metrics."
+        ],
+        screens: [
+          ["images/guidedmind/screen-1.webp", "Student Dashboard"],
+          ["images/guidedmind/screen-2.webp", "Freedom Wall Consultation"],
+          ["images/guidedmind/screen-3.webp", "Teacher Dashboard"],
+          ["images/guidedmind/screen-4.webp", "My Lessons"],
+          ["images/guidedmind/screen-5.webp", "Progress Analytics"]
+        ]
+      },
+      pos: {
+        title: "POS and Inventory System",
+        category: "Retail & Grocery",
+        image: "images/pos/inventory-system.webp",
+        visit: "https://demo-inertiapos.page.gd",
+        github: "https://github.com/aldrieBQRN/inertia-pos",
+        stack: ["Laravel", "React", "Inertia.js", "MySQL"],
+        status: "In Production",
+        summary: "Manual point of sale and inventory tracking caused lack of stock visibility, fragmented sales data, and complex receipt management. This platform delivers a fast POS terminal with barcode scanning, inventory management, and sales analytics.",
+        highlights: [
+          "Fast POS terminal with barcode scanning.",
+          "Real-time inventory management.",
+          "Sales analytics dashboard with charts.",
+          "Held orders and resume functionality.",
+          "Thermal receipt printing & role-based access."
+        ],
+        screens: [
+          ["images/pos/screen-1.webp", "POS Terminal"],
+          ["images/pos/screen-2.webp", "POS Barcode Scanning"],
+          ["images/pos/screen-3.webp", "Inventory Management"],
+          ["images/pos/screen-4.webp", "Sales Analytics"],
+          ["images/pos/screen-5.webp", "Held Orders"],
+          ["images/pos/screen-6.webp", "Reports"]
+        ]
+      },
+      azurehaven: {
+        title: "Azure Haven Resort",
+        category: "Standalone Web App",
+        image: "images/azurehaven/hero.webp",
+        visit: "https://azure-haven-w2r2.vercel.app/",
+        github: "https://github.com/aldrieBQRN/azure-haven",
+        stack: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS"],
+        status: "Live Web App",
+        summary: "Hotels and resort businesses need a self-contained reservation system that operates smoothly without requiring heavy backend servers or external databases. Azure Haven Resort provides a client-side localStorage booking engine.",
+        highlights: [
+          "Standalone client-side storage engine using localStorage for zero-database operations.",
+          "Real-time date overlap and inventory availability checks preventing double bookings.",
+          "Interactive checkout modal with dynamic night counts, resort tax calculation, and instant reference code generation.",
+          "Customer 'My Booking' lookup dialog with email + code authentication and cancellation workflows.",
+          "Responsive luxury design system built with Next.js 14, TypeScript, and Tailwind CSS."
+        ],
+        screens: [
+          ["images/azurehaven/screen-1.webp", "Hero & Availability Search"],
+          ["images/azurehaven/screen-2.webp", "Rooms & Suites Accommodations"],
+          ["images/azurehaven/screen-3.webp", "Checkout & Reservation Lookup Modal"]
+        ]
+      },
+      marrowcafe: {
+        title: "Marrow Cafe",
+        category: "F&B Brand & Showcase",
+        image: "images/marrowcafe/hero.webp",
+        visit: "https://marrow-cafe-six.vercel.app/",
+        github: "https://github.com/aldrieBQRN/marrow-cafe",
+        stack: ["HTML5", "Vanilla CSS", "JavaScript ES6+", "Responsive Design"],
+        status: "Live Website",
+        summary: "Local coffee and milk tea shops struggle with discovery and lack an aesthetic web presence without framework bloat. Marrow Cafe is an ultra-fast, zero-build landing page with editorial typography, drinks menu, and customer reviews.",
+        highlights: [
+          "Ultra-fast, zero-build architecture powered by pure HTML5, vanilla CSS, and vanilla JavaScript.",
+          "Curated editorial aesthetic featuring Fraunces serif & Inter typography with frosted-glass navigation.",
+          "Interactive featured drinks showcase with pricing, cup sizes, and ingredients breakdown.",
+          "High-conversion call-to-actions, store hours, customer reviews, and integrated Google Maps.",
+          "Touch-friendly horizontal moments photo gallery with CSS scroll-snap."
+        ],
+        screens: [
+          ["images/marrowcafe/screen-1.webp", "Hero & Brand Story"],
+          ["images/marrowcafe/screen-2.webp", "Our Story & Cafe Vibe"],
+          ["images/marrowcafe/screen-3.webp", "Featured Drinks Menu"],
+          ["images/marrowcafe/screen-4.webp", "Customer Reviews & Testimonials"],
+          ["images/marrowcafe/screen-5.webp", "Interactive FAQ Accordion"],
+          ["images/marrowcafe/screen-6.webp", "Store Hours, Interactive Map & Moments Gallery"]
+        ]
+      },
+      clinic: {
+        title: "School Clinic System",
+        category: "Healthcare Management",
+        image: "images/clinic/system.webp",
+        visit: "https://demo-kccfclinic.page.gd",
+        github: "https://github.com/aldrieBQRN/school-clinic-system",
+        stack: ["PHP 7.4+", "MySQL", "HTML5 & CSS3", "JavaScript ES6+"],
+        status: "In Production",
+        summary: "KCCF School Clinic lacked a centralized system for managing student health records, patient visits, and medicine inventory. This system provides role-based authentication, student management, visit queues, and inventory alerts.",
+        highlights: [
+          "Secure role-based authentication system (Admin & Nurse roles).",
+          "Student management with enrollment tracking across 4 programs.",
+          "Real-time patient visit queue management with vital signs recording.",
+          "Health records with diagnosis and treatment tracking.",
+          "Medicine inventory with low-stock and expiration alerts.",
+          "Admin dashboard with comprehensive reporting and PDF exports.",
+          "Mobile-responsive design for accessibility across devices.",
+          "Advanced search and filter capabilities across all modules."
+        ],
+        screens: [
+          ["images/clinic/screen-1.webp", "Login Screen"],
+          ["images/clinic/screen-2.webp", "Admin Dashboard"],
+          ["images/clinic/screen-3.webp", "Patient Management"],
+          ["images/clinic/screen-4.webp", "Appointments Schedule"],
+          ["images/clinic/screen-5.webp", "Medical Records"],
+          ["images/clinic/screen-6.webp", "Nurse Notes"]
+        ]
+      },
+      sales: {
+        title: "Sales Mapping System",
+        category: "Field Operations",
+        image: "images/sales/mapping-system.webp",
+        visit: "https://sales-mapping.page.gd",
+        github: "https://github.com/aldrieBQRN/sales-mapping",
+        stack: ["Laravel", "Tailwind CSS", "Leaflet.js", "Alpine.js"],
+        status: "In Production",
+        summary: "Manual tracking of client locations and fragmented reporting led to lack of visibility for field operations. This platform features an interactive live map with regional clustering, real-time client location tracking, and automated PDF reporting.",
+        highlights: [
+          "Interactive live map with regional clustering.",
+          "Real-time client location tracking.",
+          "Centralized analytics dashboard (DepEd vs. Government).",
+          "Automated PDF reporting.",
+          "Secure role-based access control."
+        ],
+        screens: [
+          ["images/sales/screen-1.webp", "Sales Map View"],
+          ["images/sales/screen-2.webp", "Sales Regional Clustering"],
+          ["images/sales/screen-3.webp", "Sales Analytics Dashboard"]
+        ]
+      },
+      gasguard: {
+        title: "GasGuard IoT Monitoring System",
+        category: "IoT & Safety",
+        image: "images/gasguard/iot-system.webp",
+        visit: "https://gasguard.bentesais.store",
+        github: "https://github.com/aldrieBQRN/gasguard",
+        stack: ["C++ (Arduino)", "ESP32 & IoT", "PHP", "MySQL"],
+        status: "Live IoT System",
+        summary: "No real-time gas leak detection in households led to undetected safety risks. GasGuard combines an ESP32 hardware unit with OLED status display, real-time sensors, and a web dashboard for live monitoring and instant alerts.",
+        highlights: [
+          "ESP32 hardware unit with OLED status display.",
+          "Real-time gas leak detection sensors.",
+          "Web dashboard for live monitoring.",
+          "Historical trends and safety alerts.",
+          "Instant notifications on gas detection."
+        ],
+        screens: [
+          ["images/gasguard/screen-1.webp", "GasGuard Hardware Unit"],
+          ["images/gasguard/screen-2.webp", "GasGuard Web Dashboard"],
+          ["images/gasguard/screen-3.webp", "GasGuard Alerts"]
+        ]
+      }
+    };
+
+    // ----------------------------------------------------------------
+    // 2. Triple-State Theme Switcher (System / Light / Dark)
+    // ----------------------------------------------------------------
+    const themeSystemBtn = document.getElementById("theme-system-btn");
+    const themeLightBtn = document.getElementById("theme-light-btn");
+    const themeDarkBtn = document.getElementById("theme-dark-btn");
+
+    function applyTheme(theme, save = true) {
+      if (save) localStorage.setItem("theme", theme);
+      
+      let effectiveTheme = theme;
+      if (theme === "system") {
+        effectiveTheme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      document.documentElement.dataset.theme = effectiveTheme;
+      if (effectiveTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      // Update button active indication (aria-pressed and classes matching reference)
+      const drawerThemeSystemBtn = document.getElementById("drawer-theme-system-btn");
+      const drawerThemeLightBtn = document.getElementById("drawer-theme-light-btn");
+      const drawerThemeDarkBtn = document.getElementById("drawer-theme-dark-btn");
+
+      [themeSystemBtn, themeLightBtn, themeDarkBtn].forEach(b => {
+        b.className = "theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 text-foreground/40 hover:text-foreground hover:bg-foreground/10 cursor-pointer";
+        b.setAttribute("aria-pressed", "false");
+      });
+
+      if (drawerThemeSystemBtn && drawerThemeLightBtn && drawerThemeDarkBtn) {
+        [drawerThemeSystemBtn, drawerThemeLightBtn, drawerThemeDarkBtn].forEach(b => {
+          b.className = "theme-btn grid size-7 place-items-center rounded-full cursor-pointer";
+          b.setAttribute("aria-pressed", "false");
+        });
+      }
+
+      if (theme === "system") {
+        themeSystemBtn.className = "theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 bg-foreground/10 text-foreground hover:bg-foreground/15 cursor-pointer";
+        themeSystemBtn.setAttribute("aria-pressed", "true");
+        if (drawerThemeSystemBtn) {
+          drawerThemeSystemBtn.className = "theme-btn grid size-7 place-items-center rounded-full cursor-pointer";
+          drawerThemeSystemBtn.setAttribute("aria-pressed", "true");
+        }
+      } else if (theme === "light") {
+        themeLightBtn.className = "theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 bg-foreground/10 text-foreground hover:bg-foreground/15 cursor-pointer";
+        themeLightBtn.setAttribute("aria-pressed", "true");
+        if (drawerThemeLightBtn) {
+          drawerThemeLightBtn.className = "theme-btn grid size-7 place-items-center rounded-full cursor-pointer";
+          drawerThemeLightBtn.setAttribute("aria-pressed", "true");
+        }
+      } else {
+        themeDarkBtn.className = "theme-btn grid w-7 place-items-center rounded-full transition-all sm:w-8 bg-foreground/10 text-foreground hover:bg-foreground/15 cursor-pointer";
+        themeDarkBtn.setAttribute("aria-pressed", "true");
+        if (drawerThemeDarkBtn) {
+          drawerThemeDarkBtn.className = "theme-btn grid size-7 place-items-center rounded-full cursor-pointer";
+          drawerThemeDarkBtn.setAttribute("aria-pressed", "true");
+        }
+      }
+    }
+
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    applyTheme(savedTheme, false);
+
+    themeSystemBtn.addEventListener("click", () => applyTheme("system"));
+    themeLightBtn.addEventListener("click", () => applyTheme("light"));
+    themeDarkBtn.addEventListener("click", () => applyTheme("dark"));
+
+    const drawerThemeSystemBtn = document.getElementById("drawer-theme-system-btn");
+    const drawerThemeLightBtn = document.getElementById("drawer-theme-light-btn");
+    const drawerThemeDarkBtn = document.getElementById("drawer-theme-dark-btn");
+    if (drawerThemeSystemBtn) drawerThemeSystemBtn.addEventListener("click", () => applyTheme("system"));
+    if (drawerThemeLightBtn) drawerThemeLightBtn.addEventListener("click", () => applyTheme("light"));
+    if (drawerThemeDarkBtn) drawerThemeDarkBtn.addEventListener("click", () => applyTheme("dark"));
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      if (localStorage.getItem("theme") === "system") {
+        applyTheme("system", false);
+      }
+    });
+
+    // ----------------------------------------------------------------
+    // 3. Header Scroll Progress Line
+    // ----------------------------------------------------------------
+    const progressLine = document.getElementById("scroll-progress-line");
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0;
+      if (progressLine) {
+        progressLine.style.transform = `scaleX(${Math.min(1, Math.max(0, scrollPercent))})`;
+      }
+    }, { passive: true });
+
+    // ----------------------------------------------------------------
+    // 4. Modal Controllers
+    // ----------------------------------------------------------------
+    const projectModal = document.getElementById("projectModal");
+    const projectModalContent = document.getElementById("projectModalContent");
+    const imageModal = document.getElementById("imageModal");
+    const imageModalImg = document.getElementById("imageModalImg");
+    const imageModalTitle = document.getElementById("imageModalTitle");
+    const sitemapModal = document.getElementById("site-menu");
+    const contactModal = document.getElementById("contactModal");
+
+    function openProjectModal(key) {
+      const p = projectsData[key];
+      if (!p) return;
+
+      const visitBtn = p.visit && p.visit !== '#' ? `
+        <a href="${p.visit}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-wider uppercase transition-opacity hover:opacity-85 shadow-sm">
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span>View Website</span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      ` : '';
+
+      const githubBtn = p.github && p.github !== '#' ? `
+        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 border border-[var(--weave-rule)] text-foreground/80 hover:text-foreground hover:border-foreground/40 text-[11px] font-bold tracking-wider uppercase transition-colors shadow-sm">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" class="size-3.5">
+            <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+          </svg>
+          <span>Source Code</span>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      ` : '';
+
+      const screensHTML = p.screens && p.screens.length > 0 ? `
+        <div class="mt-6 pt-6 border-t border-[var(--weave-rule)]">
+          <div class="flex items-baseline justify-between mb-3">
+            <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground">
+              UI Screens &amp; Mockups
+            </h4>
+            <span class="text-[10px] font-chakra text-foreground/40 uppercase tracking-widest">Click image to enlarge</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            ${p.screens.map(([src, alt]) => `
+              <div onclick="openImagePreview('${src}', '${alt}')" class="group relative aspect-video overflow-hidden border border-[var(--weave-rule)] rounded-sm cursor-pointer bg-black/5 dark:bg-white/5">
+                <img src="${src}" alt="${alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-chakra tracking-wider uppercase font-semibold">
+                  Expand
+                </div>
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2 text-[10px] text-white/90 truncate font-chakra">
+                  ${alt}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      projectModalContent.innerHTML = `
+        <!-- Top Meta & Category -->
+        <div class="flex items-center gap-2 text-[10px] font-chakra tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+          <span>${p.category}</span>
+          <span>•</span>
+          <span>${p.status}</span>
+        </div>
+
+        <!-- Title -->
+        <div class="mt-1 mb-5">
+          <h2 class="font-condensed text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-foreground">
+            ${p.title}
+          </h2>
+        </div>
+
+        <!-- Featured Mockup Screenshot with Click to Preview -->
+        <div onclick="openImagePreview('${p.image}', '${p.title} Mockup')" class="group relative overflow-hidden border border-[var(--weave-rule)] rounded-sm mb-6 aspect-video bg-black/5 dark:bg-white/5 cursor-pointer">
+          <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102">
+          <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-chakra tracking-wider uppercase gap-2">
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+            Click to view full mockup
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <p class="text-sm leading-relaxed text-foreground/80 mb-5">
+          ${p.summary}
+        </p>
+
+        <!-- Key Highlights -->
+        <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground mb-2">
+          Key Highlights
+        </h4>
+        <ul class="space-y-1.5 text-xs text-foreground/70 mb-6 list-disc list-inside">
+          ${p.highlights.map(h => `<li>${h}</li>`).join("")}
+        </ul>
+
+        <!-- Technologies Used -->
+        <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground mb-2">
+          Technologies Used
+        </h4>
+        <div class="flex flex-wrap gap-1.5 mb-6">
+          ${p.stack.map(s => `<span class="border border-[var(--weave-rule)] px-2.5 py-1 text-[10px] font-chakra tracking-wide text-foreground/70">${s}</span>`).join("")}
+        </div>
+
+        <!-- UI Screens & Mockups Gallery -->
+        ${screensHTML}
+
+        <!-- Bottom Actions -->
+        <div class="pt-6 mt-6 border-t border-[var(--weave-rule)] flex flex-wrap justify-between items-center gap-3">
+          <div class="flex flex-wrap gap-2">
+            ${visitBtn}
+            ${githubBtn}
+          </div>
+          <button type="button" onclick="closeProjectModal()" class="font-chakra px-4 py-2 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40">
+            Close
+          </button>
+        </div>
+      `;
+
+      projectModal.classList.remove("hidden");
+      projectModal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeProjectModal() {
+      projectModal.classList.add("hidden");
+      projectModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    function openImagePreview(src, title) {
+      imageModalImg.src = src;
+      imageModalTitle.textContent = title;
+      imageModal.classList.remove("hidden");
+      imageModal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal() {
+      imageModal.classList.add("hidden");
+      imageModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    const siteMenu = document.getElementById("site-menu");
+    const siteMenuBackdrop = document.getElementById("siteMenuBackdrop");
+    const menuToggleBtn = document.getElementById("menu-toggle-btn");
+
+    function openSiteMenu() {
+      if (!siteMenu || !siteMenuBackdrop) return;
+      siteMenuBackdrop.classList.remove("pointer-events-none", "opacity-0");
+      siteMenuBackdrop.classList.add("opacity-100");
+      siteMenu.classList.remove("translate-x-full");
+      siteMenu.classList.add("translate-x-0");
+      document.body.style.overflow = "hidden";
+      if (menuToggleBtn) menuToggleBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function closeSiteMenu() {
+      if (!siteMenu || !siteMenuBackdrop) return;
+      siteMenuBackdrop.classList.remove("opacity-100");
+      siteMenuBackdrop.classList.add("opacity-0", "pointer-events-none");
+      siteMenu.classList.remove("translate-x-0");
+      siteMenu.classList.add("translate-x-full");
+      document.body.style.overflow = "";
+      if (menuToggleBtn) menuToggleBtn.setAttribute("aria-expanded", "false");
+    }
+
+    // Backwards compatibility alias
+    function openSitemapModal() { openSiteMenu(); }
+    function closeSitemapModal() { closeSiteMenu(); }
+
+    function downloadResume(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const fileName = "John_Aldrie_Baquiran_Resume.pdf";
+      if (window.RESUME_BASE64) {
+        try {
+          const binaryString = window.atob(window.RESUME_BASE64);
+          const len = binaryString.length;
+          const bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+          const blob = new Blob([bytes], { type: "application/octet-stream" });
+          const blobUrl = URL.createObjectURL(blob);
+          const tempLink = document.createElement("a");
+          tempLink.style.display = "none";
+          tempLink.href = blobUrl;
+          tempLink.setAttribute("download", fileName);
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          setTimeout(() => {
+            document.body.removeChild(tempLink);
+            URL.revokeObjectURL(blobUrl);
+          }, 1000);
+          return false;
+        } catch (err) {
+          console.error("Base64 resume download error:", err);
+        }
+      }
+
+      fetch("resume.pdf")
+        .then(res => {
+          if (!res.ok) throw new Error("Fetch failed");
+          return res.blob();
+        })
+        .then(blob => {
+          const octetBlob = new Blob([blob], { type: "application/octet-stream" });
+          const blobUrl = URL.createObjectURL(octetBlob);
+          const tempLink = document.createElement("a");
+          tempLink.style.display = "none";
+          tempLink.href = blobUrl;
+          tempLink.setAttribute("download", fileName);
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          setTimeout(() => {
+            document.body.removeChild(tempLink);
+            URL.revokeObjectURL(blobUrl);
+          }, 1000);
+        })
+        .catch(() => {
+          const tempLink = document.createElement("a");
+          tempLink.style.display = "none";
+          tempLink.href = "resume.pdf";
+          tempLink.setAttribute("download", fileName);
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          setTimeout(() => document.body.removeChild(tempLink), 500);
+        });
+      return false;
+    }
+
+    function openContactModal() {
+      contactModal.classList.remove("hidden");
+      contactModal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeContactModal() {
+      contactModal.classList.add("hidden");
+      contactModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    // Modal triggers
+    if (menuToggleBtn) menuToggleBtn.addEventListener("click", openSiteMenu);
+
+    // Close on backdrop click
+    [projectModal, imageModal, contactModal].forEach(m => {
+      m.addEventListener("click", (e) => {
+        if (e.target === m) {
+          m.classList.add("hidden");
+          m.classList.remove("flex");
+          document.body.style.overflow = "";
+        }
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeSiteMenu();
+        [projectModal, imageModal, contactModal].forEach(m => {
+          m.classList.add("hidden");
+          m.classList.remove("flex");
+        });
+        document.body.style.overflow = "";
+      }
+    });
+
+    // ----------------------------------------------------------------
+    // 5. EmailJS & Contact Form Submission
+    // ----------------------------------------------------------------
+    (function initContactForm() {
+      if (typeof emailjs !== "undefined") {
+        emailjs.init("rwx2jFbjcDNdbhD_R");
+      }
+
+      const form = document.getElementById("contactForm");
+      const submitBtn = document.getElementById("contactSubmitBtn");
+      const submitText = document.getElementById("contactSubmitText");
+
+      if (!form) return;
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Honeypot spam trap
+        const honeypot = document.getElementById("bot_honeypot");
+        if (honeypot && honeypot.value.trim() !== "") {
+          closeContactModal();
+          form.reset();
+          return;
+        }
+
+        // Disable button and show sending status
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          if (submitText) submitText.textContent = "Sending...";
+        }
+
+        const serviceID = "service_sinihpm";
+        const templateID = "template_g4yug8b";
+
+        emailjs.sendForm(serviceID, templateID, form)
+          .then(function() {
+            closeContactModal();
+            form.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (submitText) submitText.textContent = "Send Message";
+            }
+
+            if (typeof Swal !== "undefined") {
+              Swal.fire({
+                icon: "success",
+                title: "Message Sent!",
+                text: "Thank you for reaching out. I'll get back to you as soon as possible.",
+                confirmButtonColor: "#E2793F",
+                background: "var(--surface)",
+                color: "var(--foreground)",
+                customClass: {
+                  popup: "border border-[var(--weave-rule)] rounded-none"
+                }
+              });
+            } else {
+              alert("Message sent successfully! Thank you for reaching out.");
+            }
+          })
+          .catch(function(error) {
+            console.error("EmailJS error:", error);
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              if (submitText) submitText.textContent = "Send Message";
+            }
+
+            if (typeof Swal !== "undefined") {
+              Swal.fire({
+                icon: "error",
+                title: "Delivery Failed",
+                text: "Could not send the message automatically. Please reach out directly to aldriebaquiran15@gmail.com.",
+                confirmButtonColor: "#E2793F",
+                background: "var(--surface)",
+                color: "var(--foreground)",
+                customClass: {
+                  popup: "border border-[var(--weave-rule)] rounded-none"
+                }
+              });
+            } else {
+              alert("Could not send the message. Please email me directly at aldriebaquiran15@gmail.com.");
+            }
+          });
+      });
+    })();
+  </script>
+
+</body>
+</html>

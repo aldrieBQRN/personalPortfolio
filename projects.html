@@ -189,6 +189,27 @@
       background-color: var(--accent-soft);
       color: var(--accent);
     }
+  
+    /* ============================================================
+       MOBILE RESPONSIVE OVERRIDES
+       ============================================================ */
+    /* Page hero: tighter padding on mobile */
+    @media (max-width: 639px) {
+      .page-hero { padding-top: 2rem; padding-bottom: 2rem; }
+      .page-h1 { font-size: 2rem; }
+    }
+    /* Project grid: 1 col on mobile */
+    @media (max-width: 639px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    /* Modals: full-screen on mobile */
+    @media (max-width: 639px) {
+      .modal-sheet { width: 100%; max-width: 100%; margin: 0; border-radius: 0; min-height: 100dvh; max-height: 100dvh; }
+    }
+    /* Experience timeline on sub-pages */
+    @media (max-width: 479px) {
+      .exp-timeline-row { grid-template-columns: 1.25rem 1fr; }
+    }
   </style>
 </head>
 
@@ -664,8 +685,8 @@
        ============================================================ -->
 
   <!-- 1. PROJECT DETAIL MODAL -->
-  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" aria-modal="true" role="dialog">
-    <div class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-6 sm:p-8 shadow-2xl rounded-sm">
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 modal-backdrop" aria-modal="true" role="dialog">
+    <div class="relative w-full max-w-4xl max-h-[90vh] sm:max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-5 sm:p-8 shadow-2xl rounded-sm">
       <button type="button" onclick="closeProjectModal()" aria-label="Close project modal" class="absolute top-5 right-5 text-foreground/50 hover:text-foreground">
         <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-6">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -990,7 +1011,7 @@
         visit: "https://airsafe-nasugbu.freedev.app/",
         github: "https://github.com/aldrieBQRN/airsafe-nasugbu",
         stack: ["Laravel 12", "React 18", "Inertia.js 2.0", "Tailwind CSS", "Leaflet.js"],
-        status: "Live Deployment",
+        status: "Live",
         summary: "Nasugbu municipality lacked real-time air quality monitoring across districts. AirSafe Nasugbu provides real-time AQI and heat index monitoring from distributed IoT sensors, multi-role dashboards, and interactive GIS mapping.",
         highlights: [
           "Real-time AQI and heat index monitoring from distributed IoT sensors.",
@@ -1018,7 +1039,7 @@
         visit: "https://papayabeach.page.gd",
         github: "https://github.com/aldrieBQRN/tourism-booking",
         stack: ["Laravel 11", "Vue.js 3", "Inertia.js", "MySQL", "Tailwind CSS"],
-        status: "Live in Use",
+        status: "Live",
         summary: "No unified booking flow for multi-stop tours existed. Operators relied on phone calls and manual tracking, causing double bookings and missed revenue. This unified reservation platform features real-time availability, online payments, and automated PDF confirmations.",
         highlights: [
           "Unified reservation system with real-time availability.",
@@ -1042,7 +1063,7 @@
         visit: "https://guidedmind.page.gd",
         github: "https://github.com/aldrieBQRN/guidedmind",
         stack: ["Laravel 10+", "Vue.js 3", "Inertia.js", "MySQL"],
-        status: "Live in Use",
+        status: "Live",
         summary: "Manual student progress tracking and lack of personalized guidance made it difficult for teachers to identify at-risk students. GuidedMind provides interactive learning modules with progress tracking and an AI-powered Freedom Wall for personalized guidance.",
         highlights: [
           "Interactive learning modules with progress tracking.",
@@ -1066,7 +1087,7 @@
         visit: "https://demo-inertiapos.page.gd",
         github: "https://github.com/aldrieBQRN/inertia-pos",
         stack: ["Laravel", "React", "Inertia.js", "MySQL"],
-        status: "In Production",
+        status: "Live",
         summary: "Manual point of sale and inventory tracking caused lack of stock visibility, fragmented sales data, and complex receipt management. This platform delivers a fast POS terminal with barcode scanning, inventory management, and sales analytics.",
         highlights: [
           "Fast POS terminal with barcode scanning.",
@@ -1091,7 +1112,7 @@
         visit: "https://azure-haven-w2r2.vercel.app/",
         github: "https://github.com/aldrieBQRN/azure-haven",
         stack: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS"],
-        status: "Live Web App",
+        status: "Live",
         summary: "Hotels and resort businesses need a self-contained reservation system that operates smoothly without requiring heavy backend servers or external databases. Azure Haven Resort provides a client-side localStorage booking engine.",
         highlights: [
           "Standalone client-side storage engine using localStorage for zero-database operations.",
@@ -1113,7 +1134,7 @@
         visit: "https://marrow-cafe-six.vercel.app/",
         github: "https://github.com/aldrieBQRN/marrow-cafe",
         stack: ["HTML5", "Vanilla CSS", "JavaScript ES6+", "Responsive Design"],
-        status: "Live Website",
+        status: "Live",
         summary: "Local coffee and milk tea shops struggle with discovery and lack an aesthetic web presence without framework bloat. Marrow Cafe is an ultra-fast, zero-build landing page with editorial typography, drinks menu, and customer reviews.",
         highlights: [
           "Ultra-fast, zero-build architecture powered by pure HTML5, vanilla CSS, and vanilla JavaScript.",
@@ -1138,7 +1159,7 @@
         visit: "https://demo-kccfclinic.page.gd",
         github: "https://github.com/aldrieBQRN/school-clinic-system",
         stack: ["PHP 7.4+", "MySQL", "HTML5 & CSS3", "JavaScript ES6+"],
-        status: "In Production",
+        status: "Live",
         summary: "KCCF School Clinic lacked a centralized system for managing student health records, patient visits, and medicine inventory. This system provides role-based authentication, student management, visit queues, and inventory alerts.",
         highlights: [
           "Secure role-based authentication system (Admin & Nurse roles).",
@@ -1166,7 +1187,7 @@
         visit: "https://sales-mapping.page.gd",
         github: "https://github.com/aldrieBQRN/sales-mapping",
         stack: ["Laravel", "Tailwind CSS", "Leaflet.js", "Alpine.js"],
-        status: "In Production",
+        status: "Live",
         summary: "Manual tracking of client locations and fragmented reporting led to lack of visibility for field operations. This platform features an interactive live map with regional clustering, real-time client location tracking, and automated PDF reporting.",
         highlights: [
           "Interactive live map with regional clustering.",
@@ -1188,7 +1209,7 @@
         visit: "https://gasguard.bentesais.store",
         github: "https://github.com/aldrieBQRN/gasguard",
         stack: ["C++ (Arduino)", "ESP32 & IoT", "PHP", "MySQL"],
-        status: "Live IoT System",
+        status: "Live",
         summary: "No real-time gas leak detection in households led to undetected safety risks. GasGuard combines an ESP32 hardware unit with OLED status display, real-time sensors, and a web dashboard for live monitoring and instant alerts.",
         highlights: [
           "ESP32 hardware unit with OLED status display.",
@@ -1318,7 +1339,7 @@
       if (!p) return;
 
       const visitBtn = p.visit && p.visit !== '#' ? `
-        <a href="${p.visit}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-wider uppercase transition-opacity hover:opacity-85 shadow-sm">
+        <a href="${p.visit}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-wider uppercase transition-opacity hover:opacity-85 shadow-sm">
           <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -1333,7 +1354,7 @@
       ` : '';
 
       const githubBtn = p.github && p.github !== '#' ? `
-        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 border border-[var(--weave-rule)] text-foreground/80 hover:text-foreground hover:border-foreground/40 text-[11px] font-bold tracking-wider uppercase transition-colors shadow-sm">
+        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 border border-[var(--weave-rule)] text-foreground/80 hover:text-foreground hover:border-foreground/40 text-[11px] font-bold tracking-wider uppercase transition-colors shadow-sm">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" class="size-3.5">
             <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
           </svg>
@@ -1347,13 +1368,13 @@
 
       const screensHTML = p.screens && p.screens.length > 0 ? `
         <div class="mt-6 pt-6 border-t border-[var(--weave-rule)]">
-          <div class="flex items-baseline justify-between mb-3">
-            <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground">
+          <div class="mb-3">
+            <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground whitespace-nowrap">
               UI Screens &amp; Mockups
             </h4>
-            <span class="text-[10px] font-chakra text-foreground/40 uppercase tracking-widest">Click image to enlarge</span>
+            <span class="block mt-0.5 text-[10px] font-chakra text-foreground/40 uppercase tracking-widest">Click image to enlarge</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
             ${p.screens.map(([src, alt]) => `
               <div onclick="openImagePreview('${src}', '${alt}')" class="group relative aspect-video overflow-hidden border border-[var(--weave-rule)] rounded-sm cursor-pointer bg-black/5 dark:bg-white/5">
                 <img src="${src}" alt="${alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
@@ -1371,14 +1392,14 @@
 
       projectModalContent.innerHTML = `
         <!-- Top Meta & Category -->
-        <div class="flex items-center gap-2 text-[10px] font-chakra tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+        <div class="pr-10 flex flex-wrap items-center gap-2 text-[10px] font-chakra tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
           <span>${p.category}</span>
           <span>•</span>
           <span>${p.status}</span>
         </div>
 
         <!-- Title -->
-        <div class="mt-1 mb-5">
+        <div class="mt-1 mb-5 pr-10">
           <h2 class="font-condensed text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-foreground">
             ${p.title}
           </h2>
@@ -1423,12 +1444,12 @@
         ${screensHTML}
 
         <!-- Bottom Actions -->
-        <div class="pt-6 mt-6 border-t border-[var(--weave-rule)] flex flex-wrap justify-between items-center gap-3">
+        <div class="pt-6 mt-6 border-t border-[var(--weave-rule)] flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-3">
           <div class="flex flex-wrap gap-2">
             ${visitBtn}
             ${githubBtn}
           </div>
-          <button type="button" onclick="closeProjectModal()" class="font-chakra px-4 py-2 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40">
+          <button type="button" onclick="closeProjectModal()" class="font-chakra w-full sm:w-auto px-4 py-2.5 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40">
             Close
           </button>
         </div>

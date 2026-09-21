@@ -343,6 +343,54 @@
       background-color: var(--accent-soft);
       color: var(--accent);
     }
+    /* ============================================================
+       MOBILE RESPONSIVE OVERRIDES
+       ============================================================ */
+
+    /* Header: hide view-mode text label on very small screens */
+    @media (max-width: 479px) {
+      #toggle-view-mode-label { display: none; }
+      #toggle-view-mode-btn { padding-left: 0.625rem; padding-right: 0.625rem; gap: 0; }
+      #toggle-view-mode-btn svg { display: block !important; }
+    }
+
+    /* Hero: tighter vertical padding & smaller h1 on mobile */
+    @media (max-width: 639px) {
+      .hero-all-pages { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .hero-h1 { font-size: 2.5rem; line-height: 0.95; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-actions > * { width: 100%; justify-content: center; }
+    }
+    @media (min-width: 375px) and (max-width: 639px) {
+      .hero-h1 { font-size: 2.75rem; }
+    }
+
+    /* Simple-mode compact profile: stack buttons properly on mobile */
+    @media (max-width: 479px) {
+      .simple-profile-actions { flex-wrap: wrap; }
+      .simple-profile-actions > a,
+      .simple-profile-actions > button { flex: 1 1 auto; min-width: 130px; }
+    }
+
+    /* Jump-to-section bar: 2 cols on sm, 1 col on xs */
+    @media (max-width: 479px) {
+      .jump-grid { grid-template-columns: repeat(1, 1fr); }
+    }
+
+    /* Bento grid: ensure single col on mobile */
+    @media (max-width: 1023px) {
+      .bento-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Experience timeline: tighten on very small screens */
+    @media (max-width: 479px) {
+      .exp-timeline-row { grid-template-columns: 1.25rem 1fr; }
+    }
+
+    /* Modals: full-width on mobile */
+    @media (max-width: 639px) {
+      .project-modal-inner { width: 100%; max-width: 100%; margin: 0; border-radius: 0; min-height: 100dvh; }
+    }
   </style>
 </head>
 
@@ -441,11 +489,11 @@
     <main class="shell pb-16">
       
       <!-- HERO: Large Typography + Portrait -->
-      <div class="flex flex-col-reverse gap-10 py-16 md:flex-row md:items-center md:gap-12 md:py-20 border-b border-[var(--weave-rule)] pb-16">
+      <div class="hero-all-pages flex flex-col-reverse gap-8 py-10 sm:py-16 md:flex-row md:items-center md:gap-12 md:py-20 border-b border-[var(--weave-rule)]">    
         
         <!-- Left Column: Big Heading & Bio -->
         <div class="flex w-full flex-col md:flex-1 justify-center">
-          <h1 class="animate-fade-in-right animate-duration-1000 animate-fill-mode-both font-condensed text-5xl font-extrabold leading-[0.95] tracking-tight uppercase sm:text-6xl md:text-7xl lg:text-8xl text-foreground">
+          <h1 class="hero-h1 animate-fade-in-right animate-duration-1000 animate-fill-mode-both font-condensed text-[2.5rem] font-extrabold leading-[0.95] tracking-tight uppercase sm:text-6xl md:text-7xl lg:text-8xl text-foreground">
             Hi, I'm John Aldrie T. Baquiran
           </h1>
           
@@ -478,7 +526,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="animate-fade-in-up animate-fill-mode-both animate-delay-640 flex flex-wrap gap-3">
+            <div class="hero-actions animate-fade-in-up animate-fill-mode-both animate-delay-640 flex flex-wrap gap-3">
               <a href="resume.pdf" onclick="downloadResume(event)" download="John_Aldrie_Baquiran_Resume.pdf" class="group inline-flex h-11 font-chakra items-center justify-center gap-2.5 px-5 text-xs font-bold tracking-[0.12em] uppercase sm:h-12 sm:gap-3 sm:px-6 sm:text-sm sm:tracking-[0.15em] bg-foreground text-background transition-opacity hover:opacity-85 cursor-pointer">
                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5 sm:size-4" aria-hidden="true" height="1em" width="1em">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -516,7 +564,7 @@
 
       <!-- JUMP TO SECTION BAR: 5 Columns Full Width (Projects, Experience, Certifications, Stack, Contact) -->
       <section aria-label="Jump to section" class="mt-0">
-        <ul class="animate-fade-in-up animate-fill-mode-both grid grid-cols-1 border-t border-l border-[var(--weave-rule)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <ul class="jump-grid animate-fade-in-up animate-fill-mode-both grid grid-cols-2 border-t border-l border-[var(--weave-rule)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <li>
             <a href="#projects" class="group flex h-full items-end justify-between gap-3 border-r border-b border-[var(--weave-rule)] px-4 py-4 transition-colors hover:bg-foreground/5 lg:px-5">
               <span class="flex min-w-0 flex-col gap-1.5">
@@ -776,7 +824,7 @@
         <ol class="mt-2 border-t border-[var(--weave-rule)]">
           
           <!-- Experience 1: Founder & Full-Stack Web Developer -->
-          <li class="animate-fade-in-up animate-delay-120 grid grid-cols-[1.75rem_1fr] gap-y-6 border-b border-[var(--weave-rule)] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
+          <li class="exp-timeline-row animate-fade-in-up animate-delay-120 grid grid-cols-[1.5rem_1fr] gap-y-4 border-b border-[var(--weave-rule)] sm:grid-cols-[1.75rem_1fr] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
             <div aria-hidden="true" class="relative col-start-1 row-span-2 row-start-1 flex flex-col items-center pt-8 md:col-start-2 md:row-span-1 md:pt-10">
               <span class="absolute inset-y-0 w-px bg-[var(--weave-rule)]"></span>
               <span class="relative flex h-7 items-center">
@@ -806,7 +854,7 @@
           </li>
 
           <!-- Experience 2: BSIT -->
-          <li class="animate-fade-in-up animate-delay-200 grid grid-cols-[1.75rem_1fr] gap-y-6 border-b border-[var(--weave-rule)] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
+          <li class="exp-timeline-row animate-fade-in-up animate-delay-200 grid grid-cols-[1.5rem_1fr] gap-y-4 border-b border-[var(--weave-rule)] sm:grid-cols-[1.75rem_1fr] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
             <div aria-hidden="true" class="relative col-start-1 row-span-2 row-start-1 flex flex-col items-center pt-8 md:col-start-2 md:row-span-1 md:pt-10">
               <span class="absolute inset-y-0 w-px bg-[var(--weave-rule)]"></span>
               <span class="relative flex h-7 items-center">
@@ -833,7 +881,7 @@
           </li>
 
           <!-- Experience 3: Systems & IoT Developer -->
-          <li class="animate-fade-in-up animate-delay-280 grid grid-cols-[1.75rem_1fr] gap-y-6 border-b border-[var(--weave-rule)] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
+          <li class="exp-timeline-row animate-fade-in-up animate-delay-280 grid grid-cols-[1.5rem_1fr] gap-y-4 border-b border-[var(--weave-rule)] sm:grid-cols-[1.75rem_1fr] md:grid-cols-[13rem_3rem_1fr] lg:grid-cols-[16rem_3rem_1fr]">
             <div aria-hidden="true" class="relative col-start-1 row-span-2 row-start-1 flex flex-col items-center pt-8 md:col-start-2 md:row-span-1 md:pt-10">
               <span class="absolute inset-y-0 w-px bg-[var(--weave-rule)]"></span>
               <span class="relative flex h-7 items-center">
@@ -1135,7 +1183,7 @@
             </p>
           </div>
 
-          <div class="mt-4 flex flex-wrap items-center gap-2">
+          <div class="simple-profile-actions mt-4 flex flex-wrap items-center gap-2">
             <a href="resume.pdf" onclick="downloadResume(event)" download="John_Aldrie_Baquiran_Resume.pdf" class="font-chakra animate-fade-in-up animate-delay-320 inline-flex h-9 shrink-0 items-center justify-center gap-2 bg-foreground px-4 text-[10px] font-bold tracking-[0.12em] whitespace-nowrap uppercase text-background transition-opacity hover:opacity-85 active:scale-95 cursor-pointer">
               <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true" height="1em" width="1em">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -1172,7 +1220,7 @@
 
       <!-- 3-Column Bento Grid -->
       <div class="mt-4 flex flex-col gap-3">
-        <div class="grid gap-3 lg:grid-cols-3">
+        <div class="bento-grid-3 grid gap-3 lg:grid-cols-3">
 
           <!-- Card 1: Experience -->
           <section class="bento-card animate-fade-in-up flex h-full flex-col p-4">
@@ -1576,8 +1624,8 @@
        ============================================================ -->
 
   <!-- 1. PROJECT DETAIL MODAL -->
-  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" aria-modal="true" role="dialog">
-    <div class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-6 sm:p-8 shadow-2xl rounded-sm">
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 modal-backdrop" aria-modal="true" role="dialog">
+    <div class="relative w-full max-w-4xl max-h-[90vh] sm:max-h-[92vh] overflow-y-auto bg-surface border border-[var(--weave-rule)] p-5 sm:p-8 shadow-2xl rounded-sm">
       <button type="button" onclick="closeProjectModal()" aria-label="Close project modal" class="absolute top-5 right-5 text-foreground/50 hover:text-foreground">
         <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-6">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1902,7 +1950,7 @@
         visit: "https://airsafe-nasugbu.freedev.app/",
         github: "https://github.com/aldrieBQRN/airsafe-nasugbu",
         stack: ["Laravel 12", "React 18", "Inertia.js 2.0", "Leaflet.js", "ESP32 Sensors", "Tailwind CSS"],
-        status: "Live Deployment",
+        status: "Live",
         summary: "Real-time air quality and heat index monitoring system with distributed IoT hardware nodes across Nasugbu municipality, offering public alert dashboards, GIS mapping, and administrative analytics.",
         highlights: [
           "Integrated ESP32 sensor telemetry for particulate matter (PM2.5, PM10) and ambient heat index.",
@@ -1926,7 +1974,7 @@
         visit: "https://guidedmind.page.gd",
         github: "https://github.com/aldrieBQRN/guidedmind",
         stack: ["Laravel 10+", "Vue.js 3", "Inertia.js", "Tailwind CSS", "MySQL"],
-        status: "Production Ready",
+        status: "Live",
         summary: "An intelligent learning support system built to detect early learning difficulties and provide personalized recommendations for students and actionable dashboards for teachers.",
         highlights: [
           "Seamless SPA experience via Inertia.js connecting Vue.js 3 with Laravel.",
@@ -1949,7 +1997,7 @@
         visit: "https://demo-inertiapos.page.gd",
         github: "https://github.com/aldrieBQRN/inertia-pos",
         stack: ["Laravel", "React", "Inertia.js", "Barcode Scanner API", "MySQL", "Tailwind CSS"],
-        status: "Live In Stores",
+        status: "Live",
         summary: "High-speed point-of-sale terminal with barcode scanning, automated stock level deductions, supplier ordering alerts, and granular sales reporting.",
         highlights: [
           "Sub-100ms checkout workflow with offline barcode buffer and instant receipt generation.",
@@ -1973,7 +2021,7 @@
         visit: "https://azure-haven-w2r2.vercel.app/",
         github: "https://github.com/aldrieBQRN/azure-haven",
         stack: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS", "Local Storage API"],
-        status: "Live Web App",
+        status: "Live",
         summary: "Luxury beachfront resort booking system featuring client-side persistence, calendar date picker availability, guest lookup, and dynamic pricing tiers.",
         highlights: [
           "Modern component architecture built with Next.js 14 App Router and TypeScript.",
@@ -1994,7 +2042,7 @@
         visit: "https://marrow-cafe-six.vercel.app/",
         github: "https://github.com/aldrieBQRN/marrow-cafe",
         stack: ["HTML5", "Vanilla CSS", "JavaScript ES6+", "Responsive Design"],
-        status: "Live Website",
+        status: "Live",
         summary: "Modern, ultra-fast landing page for a neighborhood coffee & milk tea shop featuring brand storytelling, dynamic drinks menu, and customer reviews.",
         highlights: [
           "Zero-dependency vanilla implementation achieving a 100/100 Lighthouse score.",
@@ -2018,7 +2066,7 @@
         visit: "https://papayabeach.page.gd",
         github: "https://github.com/aldrieBQRN/tourism-booking",
         stack: ["Laravel 11", "Vue.js 3", "Inertia.js", "MySQL", "Tailwind CSS"],
-        status: "Live Web Application",
+        status: "Live",
         summary: "End-to-end booking platform for multi-stop tours and local tourism operators with automated voucher issuance and guide scheduling.",
         highlights: [
           "Multi-operator portal allowing independent itinerary listings and seat caps.",
@@ -2041,7 +2089,7 @@
         visit: "https://demo-kccfclinic.page.gd",
         github: "https://github.com/aldrieBQRN/school-clinic-system",
         stack: ["PHP 7.4+", "MySQL", "JavaScript ES6+", "Bootstrap"],
-        status: "Live In Use",
+        status: "Live",
         summary: "Comprehensive healthcare management system for school institutions with student triage, medical history logging, and medicine inventory tracking.",
         highlights: [
           "Secure HIPAA/data-privacy compliant student medical record storage.",
@@ -2064,7 +2112,7 @@
         visit: "https://sales-mapping.page.gd",
         github: "https://github.com/aldrieBQRN/sales-mapping",
         stack: ["Laravel", "Tailwind CSS", "Leaflet.js", "Alpine.js"],
-        status: "Live in Production",
+        status: "Live",
         summary: "Manual tracking of client locations and fragmented reporting led to lack of visibility for field operations. This platform features an interactive live map with regional clustering, real-time client location tracking, and automated PDF reporting.",
         highlights: [
           "Interactive live map with regional clustering.",
@@ -2086,7 +2134,7 @@
         visit: "https://gasguard.bentesais.store",
         github: "https://github.com/aldrieBQRN/gasguard",
         stack: ["C++ (Arduino)", "ESP32 & IoT", "PHP", "MySQL", "OLED Display"],
-        status: "IoT Prototype",
+        status: "Live",
         summary: "ESP32-based combustible gas leak detection system featuring instant audible alarms and real-time dashboard notifications.",
         highlights: [
           "ESP32 hardware unit with real-time OLED status display.",
@@ -2255,7 +2303,7 @@
       if (!p) return;
 
       const visitBtn = p.visit && p.visit !== '#' ? `
-        <a href="${p.visit}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-wider uppercase transition-opacity hover:opacity-85 shadow-sm">
+        <a href="${p.visit}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 bg-foreground text-background text-[11px] font-bold tracking-wider uppercase transition-opacity hover:opacity-85 shadow-sm">
           <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -2270,7 +2318,7 @@
       ` : '';
 
       const githubBtn = p.github && p.github !== '#' ? `
-        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center gap-2 px-4 py-2.5 border border-[var(--weave-rule)] text-foreground/80 hover:text-foreground hover:border-foreground/40 text-[11px] font-bold tracking-wider uppercase transition-colors shadow-sm">
+        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="font-chakra inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 border border-[var(--weave-rule)] text-foreground/80 hover:text-foreground hover:border-foreground/40 text-[11px] font-bold tracking-wider uppercase transition-colors shadow-sm">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" class="size-3.5">
             <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
           </svg>
@@ -2284,13 +2332,13 @@
 
       const screensHTML = p.screens && p.screens.length > 0 ? `
         <div class="mt-6 pt-6 border-t border-[var(--weave-rule)]">
-          <div class="flex items-baseline justify-between mb-3">
-            <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground">
+          <div class="mb-3">
+            <h4 class="font-condensed text-base font-bold uppercase tracking-wider text-foreground whitespace-nowrap">
               UI Screens &amp; Mockups
             </h4>
-            <span class="text-[10px] font-chakra text-foreground/40 uppercase tracking-widest">Click image to enlarge</span>
+            <span class="block mt-0.5 text-[10px] font-chakra text-foreground/40 uppercase tracking-widest">Click image to enlarge</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
             ${p.screens.map(([src, alt]) => `
               <div onclick="openImagePreview('${src}', '${alt}')" class="group relative aspect-video overflow-hidden border border-[var(--weave-rule)] rounded-sm cursor-pointer bg-black/5 dark:bg-white/5">
                 <img src="${src}" alt="${alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
@@ -2308,14 +2356,14 @@
 
       projectModalContent.innerHTML = `
         <!-- Top Meta & Category -->
-        <div class="flex items-center gap-2 text-[10px] font-chakra tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
+        <div class="pr-10 flex flex-wrap items-center gap-2 text-[10px] font-chakra tracking-[0.2em] text-[var(--accent)] uppercase font-semibold">
           <span>${p.category}</span>
           <span>•</span>
           <span>${p.status}</span>
         </div>
 
         <!-- Title -->
-        <div class="mt-1 mb-5">
+        <div class="mt-1 mb-5 pr-10">
           <h2 class="font-condensed text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-foreground">
             ${p.title}
           </h2>
@@ -2360,12 +2408,12 @@
         ${screensHTML}
 
         <!-- Bottom Actions -->
-        <div class="pt-6 mt-6 border-t border-[var(--weave-rule)] flex flex-wrap justify-between items-center gap-3">
+        <div class="pt-6 mt-6 border-t border-[var(--weave-rule)] flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-3">
           <div class="flex flex-wrap gap-2">
             ${visitBtn}
             ${githubBtn}
           </div>
-          <button type="button" onclick="closeProjectModal()" class="font-chakra px-4 py-2 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40">
+          <button type="button" onclick="closeProjectModal()" class="font-chakra w-full sm:w-auto px-4 py-2.5 border border-[var(--weave-rule)] text-[10px] font-bold tracking-wider uppercase text-foreground/70 hover:text-foreground hover:border-foreground/40">
             Close
           </button>
         </div>

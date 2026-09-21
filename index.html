@@ -347,13 +347,6 @@
        MOBILE RESPONSIVE OVERRIDES
        ============================================================ */
 
-    /* Header: hide view-mode text label on very small screens */
-    @media (max-width: 479px) {
-      #toggle-view-mode-label { display: none; }
-      #toggle-view-mode-btn { padding-left: 0.625rem; padding-right: 0.625rem; gap: 0; }
-      #toggle-view-mode-btn svg { display: block !important; }
-    }
-
     /* Hero: tighter vertical padding & smaller h1 on mobile */
     @media (max-width: 639px) {
       .hero-all-pages { padding-top: 2.5rem; padding-bottom: 2.5rem; }
@@ -385,11 +378,6 @@
     /* Experience timeline: tighten on very small screens */
     @media (max-width: 479px) {
       .exp-timeline-row { grid-template-columns: 1.25rem 1fr; }
-    }
-
-    /* Modals: full-width on mobile */
-    @media (max-width: 639px) {
-      .project-modal-inner { width: 100%; max-width: 100%; margin: 0; border-radius: 0; min-height: 100dvh; }
     }
   </style>
 </head>
